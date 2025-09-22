@@ -1,0 +1,27 @@
+<form [formGroup]="formSerie" (ngSubmit)="addSerie()" class="forms-sample">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label> Sección: </label>
+                            <input type="text" formControlName="idSeccion" class="form-control" >
+                        </div>
+                        <div class="col-md-8">
+                            <label> Serie: </label>
+                            <input type="text" formControlName="serie" class="form-control" >
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                            <input type="hidden" formControlName="id" class="form-control" >
+                            <button type="submit" [disabled]="formSerie.invalid" class="btn btn-primary btn-icon-text">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

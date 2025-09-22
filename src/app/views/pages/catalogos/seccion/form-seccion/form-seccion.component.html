@@ -1,0 +1,23 @@
+<form [formGroup]="formSeccion" (ngSubmit)="addSeccion()" class="forms-sample">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label> Sección: </label>
+                            <input type="text" formControlName="seccion" class="form-control" >
+                        </div>
+                    </div>
+                    <br>
+                     <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                            <input type="hidden" formControlName="id" class="form-control" >
+                            <button type="submit" [disabled]="formSeccion.invalid" class="btn btn-primary btn-icon-text">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
