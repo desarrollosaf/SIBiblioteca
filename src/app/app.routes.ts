@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'; 
 import { BaseComponent } from './views/layout/base/base.component';
 import { authGuard } from './core/guards/auth.guard';
 
@@ -45,6 +45,18 @@ export const routes: Routes = [
       {
         path: 'general',
         loadChildren: () => import('./views/pages/general/general.routes')
+      },
+      {
+        path: 'secciones',
+        loadChildren: () => import('./views/pages/catalogos/seccion/seccion.routes')
+      },
+      {
+        path: 'series',
+        loadChildren: () => import('./views/pages/catalogos/serie/serie.routes')
+      },
+      {
+        path: 'subseries',
+        loadChildren: () => import('./views/pages/catalogos/subserie/subserie.routes')
       }
     ]
   },

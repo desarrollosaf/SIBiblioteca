@@ -1,5 +1,6 @@
 import express, {Application} from 'express'
 import routeUser from "../routes/user";
+import routeCatalogos from "../routes/catalogos"
 import cors from 'cors'
 import path from 'path';
 import cookieParser from 'cookie-parser'
@@ -28,6 +29,7 @@ class Server {
 
     router(){
           this.app.use(routeUser);
+          this.app.use(routeCatalogos);
     }
 
 
@@ -44,6 +46,8 @@ class Server {
         this.app.use(function (req, res, next) {
             const publicPaths = [
                 '/api/user/login',
+                '/api/catalogos/getSecciones',
+                '/api/catalogos/editSeccion'
             ];
             const isPublic = publicPaths.some(path => req.originalUrl.startsWith(path));
             if (isPublic) {
