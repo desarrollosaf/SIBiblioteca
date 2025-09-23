@@ -1,13 +1,13 @@
 export interface Registro {
     id: string;
-    seccion: string;
-    serie: string;
-    subserie: string;
+    id_seccion: number;
+    id_serie: number;
+    id_subserie: number;
     clave: string;
     ubicacion: string;
     anio: number;
     tomo: string;
-    noExp: string;
+    num_exp: string;
     fecha_inicial: Date;
     fecha_final: Date;
     institucion: string;
@@ -16,5 +16,7 @@ export interface Registro {
     observaciones: string;
     estado_doc: string;
     caracteristicas_doc: string;
-    img_doc: string;
+    path_portada: string;
+    path_doc: string;
+    tipo_acceso: string;
 }

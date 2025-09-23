@@ -31,8 +31,11 @@ const getSecciones = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.getSecciones = getSecciones;
 const addSeccion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { body } = req;
-        const idSeccion = yield secciones_1.default.create(body);
+        const { seccion } = req.body;
+        secciones_1.default.create({
+            seccion: seccion,
+            status: true
+        });
         return res.json({
             status: 200
         });
