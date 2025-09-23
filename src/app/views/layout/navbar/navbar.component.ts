@@ -16,8 +16,6 @@ import { FeatherIconDirective } from '../../../core/feather-icon/feather-icon.di
     FeatherIconDirective,
     RouterLink,
     RouterLinkActive,
-    NgFor,
-    NgIf,
     NgClass
   ],
   templateUrl: './navbar.component.html',

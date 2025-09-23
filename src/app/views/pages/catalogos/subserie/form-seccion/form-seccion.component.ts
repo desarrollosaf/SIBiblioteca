@@ -27,7 +27,10 @@ export class FormSeccionComponent {
   public _subserie = inject(SubseriesService);
   id:any;
   formSubserie: FormGroup;
+
+  subseriesArray: { id: number | string; name: string}[] = [];
   seriesArray: { id: number | string; name: string}[] = [];
+  seccionesArray: { id: number | string; name: string}[] = [];
 
   constructor(
     private subseriesService: SubseriesService,
@@ -44,7 +47,7 @@ export class FormSeccionComponent {
   }
 
   ngOnInit(): void {
-    this.getSeries();
+    this.getSecciones();
     if(this.id != null){
         this.editSubserie();
     }
@@ -110,6 +113,10 @@ getSeries(){
         }))
     ]
   })
+}
+
+getSecciones(){
+  
 }
 
 

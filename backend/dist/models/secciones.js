@@ -10,7 +10,7 @@ class Secciones extends sequelize_1.Model {
 Secciones.init({
     id: {
         autoIncrement: true,
-        type: sequelize_1.DataTypes.BIGINT.UNSIGNED,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true
     },

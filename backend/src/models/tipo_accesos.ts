@@ -9,32 +9,26 @@ import{
 
 import sequelize from '../database/connectionBiblioteca';
 
-class Secciones extends Model<
-  InferAttributes<Secciones>,
-  InferCreationAttributes<Secciones>
+class TipoAcceso extends Model<
+  InferAttributes<TipoAcceso>,
+  InferCreationAttributes<TipoAcceso>
 > {
     declare id: CreationOptional<number>;
-    declare seccion: string; 
-    declare status: boolean;
+    declare tipo: string; 
     declare createdAt?: Date;
     declare updatedAt?: Date;
 }
 
-Secciones.init(
+TipoAcceso.init(
     {
         id:{
             autoIncrement: true,
-            type: DataTypes.INTEGER,
+            type: DataTypes.BIGINT.UNSIGNED,
             allowNull: false,
             primaryKey: true
-        }, 
-        seccion:{
-            type: DataTypes.STRING(255),
-            allowNull: false
         },
-        status:{
-            type: DataTypes.BOOLEAN,
-            defaultValue: true,
+        tipo:{
+            type: DataTypes.STRING,
             allowNull: false
         },
         createdAt: {
@@ -50,9 +44,10 @@ Secciones.init(
     },
     {
         sequelize,
-        tableName: 'secciones',
+        tableName: 'tipos_accesos',
         timestamps: true,
     }
 );
 
-export default Secciones;
+
+export default TipoAcceso;
