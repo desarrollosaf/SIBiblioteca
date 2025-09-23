@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const registros_1 = require("../controllers/registros");
+const router = (0, express_1.Router)();
+router.get("/api/registros/getRegistros", registros_1.getRegistros);
+router.get("/api/registros/comboSecciones", registros_1.comboSecciones);
+router.get("/api/registros/comboSeries/:id", registros_1.comboSeries);
+router.get("/api/registros/comboSubseries/:id", registros_1.comboSubseries);
+router.get("/api/registros/comboAccesos", registros_1.comboAccesos);
+exports.default = router;
