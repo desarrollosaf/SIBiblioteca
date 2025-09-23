@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import Secciones from "../models/secciones"
 import Series from "../models/series";
+import Subseries from "../models/subseries";
 
 export const getSecciones = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -88,7 +89,14 @@ export const actDescSeccion = async (req: Request, res: Response): Promise<any> 
 
 export const getSeries = async (req: Request, res: Response): Promise<any> => {
     try {
-        const series = await Series.findAll();
+        const series = await Series.findAll({
+            include:[
+                {
+                    model: Secciones,
+                    as: 'm_seccion'
+                }
+            ]
+        });
 
         return res.json({
             data: series
@@ -101,9 +109,12 @@ export const getSeries = async (req: Request, res: Response): Promise<any> => {
 
 export const addSerie = async (req: Request, res: Response): Promise<any> => {
     try {
-            const { body } = req
-            const idSerie = await Series.create(body);
-
+            const {idSeccion, serie} = req.body
+            Series.create({
+                idSeccion: idSeccion,
+                serie: serie,
+                status: true
+            })
             return res.json({
                 status: 200
             });
@@ -164,4 +175,129 @@ export const actDescSerie = async (req: Request, res: Response): Promise<any> =>
     }
 }
 
+export const getComnboSecciones = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const secciones = await Secciones.findAll({
+            where: { status: true }
+        })
 
+        return res.json(secciones)
+
+    } catch (error) {
+        console.error('Error al traer datos:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
+
+
+
+//subseries 
+
+export const getSubseries = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const subseries = await Subseries.findAll({
+            include:[
+                {
+                    model: Series,
+                    as: 'm_serie',
+                    include:[
+                        {
+                            model: Secciones,
+                            as: 'm_seccion',
+                            
+                        }
+                    ],
+                }
+            ]
+        });
+
+        return res.json({
+            data: subseries
+        });
+    } catch (error) {
+        console.error('Error al generar consulta:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
+
+export const addSubserie = async (req: Request, res: Response): Promise<any> => {
+    try {
+            const {idSerie, subserie} = req.body
+            Subseries.create({
+                idSerie: idSerie,
+                subserie: subserie,
+                status: true
+            })
+            return res.json({
+                status: 200
+            });
+    } catch (error) {
+        console.error('Error al guardar seccion:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
+
+export const editSubserie = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { id } = req.params;
+        const subserie = await Subseries.findByPk(id);
+
+        return res.json( subserie );
+    } catch (error) {
+        console.error('Error al traer datos:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
+
+export const updateSubserie = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { body } = req
+        const subserie = await Subseries.findByPk(body.id);
+        await subserie?.update(body)
+
+        return res.json( subserie );
+
+
+    } catch (error) {
+        console.error('Error al editar datos:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
+
+export const actDescSubserie = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { id } = req.params;
+        const subserie = await Subseries.findByPk(id);
+
+        if(subserie?.status == true){
+            await subserie.update(
+                { status: false },                    // Valores que quieres actualizar
+                { where: { id: id} }
+            );
+            return res.json(1)
+        }else if(subserie?.status == false){
+             await subserie.update(
+                { status: true },                    // Valores que quieres actualizar
+                { where: { id: id} }
+            );
+            return res.json(2)
+        }
+    } catch (error) {
+        console.error('Error al traer datos:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
+
+export const getComnboSeries = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const series = await Series.findAll({
+            where: { status: true }
+        })
+
+        return res.json(series)
+
+    } catch (error) {
+        console.error('Error al traer datos:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
