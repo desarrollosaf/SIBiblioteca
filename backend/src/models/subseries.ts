@@ -8,16 +8,19 @@ import{
 } from 'sequelize';
 
 import sequelize from '../database/connectionBiblioteca';
+import Series from './series';
 
 class Subseries extends Model<
   InferAttributes<Subseries>,
   InferCreationAttributes<Subseries>
 > {
-    declare id: number;
+    declare id: CreationOptional<number>;
     declare idSerie: number; 
     declare subserie: string; 
+    declare status: boolean;
     declare createdAt?: Date;
     declare updatedAt?: Date;
+
 }
 
 Subseries.init(
@@ -36,6 +39,20 @@ Subseries.init(
             type: DataTypes.STRING,
             allowNull: false
         },
+        status:{
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            defaultValue: DataTypes.NOW
+        },
     },
     {
         sequelize,
@@ -43,5 +60,9 @@ Subseries.init(
         timestamps: true,
     }
 );
+
+Subseries.belongsTo(Series, {
+    foreignKey: "idSerie", as: "m_serie"
+}) 
 
 export default Subseries;

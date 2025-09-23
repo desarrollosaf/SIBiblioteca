@@ -6,8 +6,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { id } from '@siemens/ngx-datatable';
-import { SeriesService } from '../../../../../services/series.service';
-import { Series } from '../../../../../interfases/series';
+import { SubseriesService } from '../../../../../services/subseries.service';
+import { Subseries } from '../../../../../interfases/subseries';
 
 
 @Component({
@@ -24,75 +24,72 @@ import { Series } from '../../../../../interfases/series';
 })
 export class FormSeccionComponent {
   seccion: string;
-  public _series = inject(SeriesService);
+  public _subserie = inject(SubseriesService);
   id:any;
-  formSerie: FormGroup;
-  seccionArray: { id: number | string; name: string}[] = [];
-
-
+  formSubserie: FormGroup;
+  seriesArray: { id: number | string; name: string}[] = [];
 
   constructor(
-    private seriesService: SeriesService,
+    private subseriesService: SubseriesService,
     private router: Router,
     private fb: FormBuilder,
     private aRouter: ActivatedRoute,
   ){
-    this.formSerie = this.fb.group({
-      idSeccion:['', Validators.required],
-      serie:['', Validators.required],
+    this.formSubserie = this.fb.group({
+      idSerie:['', Validators.required],
+      subserie:['', Validators.required],
       id: ['']
     })
       this.id = aRouter.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
-    this.getSecciones();
+    this.getSeries();
     if(this.id != null){
-        this.editSerie();
+        this.editSubserie();
     }
   }
 
-
-addSerie(){
-  const serie: Series = {
-    serie: this.formSerie.value.serie,
-    idSeccion: this.formSerie.value.idSeccion,
-    id: this.formSerie.value.id
+addSubserie(){
+  const subserie: Subseries = {
+    subserie: this.formSubserie.value.subserie,
+    idSerie: this.formSubserie.value.idSerie,
+    id: this.formSubserie.value.id
   };
 
-  if(this.formSerie.value.id != 0 && this.formSerie.value.id != null){
-      this._series.updateSerie(serie).subscribe(data => {
+  if(this.formSubserie.value.id != 0 && this.formSubserie.value.id != null){
+      this._subserie.updateSubserie(subserie).subscribe(data => {
         Swal.fire({
           title: '',
-          text: 'Serie modificada correctamente',
+          text: 'Subserie modificada correctamente',
           icon: 'success',
           timer: 2000,
           showConfirmButton: false
         }).then((result) => {
-          this.router.navigateByUrl('/series') 
+          this.router.navigateByUrl('/subseries') 
         })
       })
     }else{
-      this._series.addSerie(serie).subscribe(data =>{
+      this._subserie.addSubserie(subserie).subscribe(data =>{
         Swal.fire({
               title: '',
-              text: 'Serie registrada correctamente',
+              text: 'Subserie registrada correctamente',
               icon: 'success',
               timer: 2000,
               showConfirmButton: false
             }).then((result) => {
-              this.router.navigateByUrl('/series') 
+              this.router.navigateByUrl('/subseries') 
             })
       })
     }
 }
 
-editSerie(){
-  this._series.editSerie(this.id).subscribe({
+editSubserie(){
+  this._subserie.editSubserie(this.id).subscribe({
     next: (response: any) => {
-      this.formSerie.setValue({
-        idSeccion: response.idSeccion,
-        serie: response.serie,
+      this.formSubserie.setValue({
+        idSerie: response.idSerie,
+        subserie: response.subserie,
         id: response.id
       })
     },
@@ -102,13 +99,14 @@ editSerie(){
   })
 }
 
-getSecciones(){
-  this._series.getSecciones().subscribe(data => {
-    this.seccionArray = [
+
+getSeries(){
+  this._subserie.getSeries().subscribe(data => {
+    this.seriesArray = [
       { id: '', name: '--Seleccione una opción--' },
-        ...data.map((item: { id: number; seccion: string }) => ({
+        ...data.map((item: { id: number; serie: string }) => ({
           id: item.id,
-          name: item.seccion
+          name: item.serie
         }))
     ]
   })

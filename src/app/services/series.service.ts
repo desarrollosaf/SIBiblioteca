@@ -40,4 +40,9 @@ export class SeriesService {
         const url = `${this.myAppUrl}${this.myAPIUrl}/actDescSerie/${id}`;
         return this.http.get(url)
       }
+
+      getSecciones():Observable<[]>{
+        const url = `${this.myAppUrl}${this.myAPIUrl}/getComnboSecciones`;
+        return this.http.get<[]>(url)
+      }
 }

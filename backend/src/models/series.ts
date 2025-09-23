@@ -8,12 +8,13 @@ import{
 } from 'sequelize';
 
 import sequelize from '../database/connectionBiblioteca';
+import Secciones from './secciones';
 
 class Series extends Model<
   InferAttributes<Series>,
   InferCreationAttributes<Series>
 > {
-    declare id: number;
+    declare id: CreationOptional<number>;
     declare idSeccion: number; 
     declare serie: string; 
     declare status: boolean;
@@ -24,7 +25,7 @@ class Series extends Model<
 Series.init(
     {
         id:{
-            autoIncrement: true,
+           autoIncrement: true,
             type: DataTypes.BIGINT.UNSIGNED,
             allowNull: false,
             primaryKey: true
@@ -41,6 +42,16 @@ Series.init(
             type: DataTypes.BOOLEAN,
             defaultValue: true
         },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true,
+            defaultValue: DataTypes.NOW
+        },
     },
     {
         sequelize,
@@ -48,5 +59,9 @@ Series.init(
         timestamps: true,
     }
 );
+
+Series.belongsTo(Secciones, {
+    foreignKey: "idSeccion", as: "m_seccion"
+}) 
 
 export default Series;

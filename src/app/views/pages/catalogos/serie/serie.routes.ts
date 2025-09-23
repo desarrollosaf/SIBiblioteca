@@ -10,7 +10,7 @@ export default[
         loadComponent: () => import('./form-seccion/form-seccion.component').then(c => c.FormSeccionComponent)
     },
     {
-        path: 'editSeccion/:id',
+        path: 'editSerie/:id',
         loadComponent: () => import('./form-seccion/form-seccion.component').then(c => c.FormSeccionComponent)
-    },
+    }
 ] as Routes;
