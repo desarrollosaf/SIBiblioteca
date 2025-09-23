@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 import { FooterComponent } from '../footer/footer.component';
 
 @Component({
@@ -9,7 +8,6 @@ import { FooterComponent } from '../footer/footer.component';
     imports: [
         RouterOutlet,
         NavbarComponent,
-        SidebarComponent,
         FooterComponent
     ],
     templateUrl: './base.component.html',
