@@ -18,12 +18,15 @@ export const getSecciones = async (req: Request, res: Response): Promise<any> =>
 
 export const addSeccion = async (req: Request, res: Response): Promise<any> => {
     try {
-            const { body } = req
-            const idSeccion = await Secciones.create(body);
+        const {seccion} = req.body
+        Secciones.create({
+            seccion: seccion,
+            status: true
+        })
 
-            return res.json({
-                status: 200
-            });
+        return res.json({
+            status: 200
+        });
     } catch (error) {
         console.error('Error al guardar seccion:', error);
         return res.status(500).json({ msg: 'Error interno del servidor'});

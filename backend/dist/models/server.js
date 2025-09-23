@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const user_1 = __importDefault(require("../routes/user"));
 const catalogos_1 = __importDefault(require("../routes/catalogos"));
+const registros_1 = __importDefault(require("../routes/registros"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
@@ -36,6 +37,7 @@ class Server {
     router() {
         this.app.use(user_1.default);
         this.app.use(catalogos_1.default);
+        this.app.use(registros_1.default);
     }
     midlewares() {
         //Parseo BOdy
@@ -49,8 +51,6 @@ class Server {
         this.app.use(function (req, res, next) {
             const publicPaths = [
                 '/api/user/login',
-                '/api/catalogos/getSecciones',
-                '/api/catalogos/editSeccion'
             ];
             const isPublic = publicPaths.some(path => req.originalUrl.startsWith(path));
             if (isPublic) {

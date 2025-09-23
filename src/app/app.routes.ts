@@ -57,6 +57,10 @@ export const routes: Routes = [
       {
         path: 'subseries',
         loadChildren: () => import('./views/pages/catalogos/subserie/subserie.routes')
+      },
+      {
+        path: 'registros',
+        loadChildren: () => import('./views/pages/registros/registro.routes')
       }
     ]
   },
