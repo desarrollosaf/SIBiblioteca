@@ -1,13 +1,14 @@
-<div class="container-fluid auth-background">
-  <div class="row w-100 mx-0 auth-page">
+<!-- <div class="fondo-con-overlay"> -->
+  <div class="container-fluid auth-background fondo">
+  <div class="row w-100 mx-6 auth-page">
     <div class="col-md-6 col-lg-5 col-xl-4 mx-auto">
       <div class="card">
         <div class="row">
-            <div class="auth-form-wrapper px-4 py-5">
-              <a routerLink="." class="nobleui-logo d-block mb-2"><span></span></a>
-              <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
-                Biblioteca
-              </h6>
+            <div class="auth-form-wrapper px-4 py-7">
+              <!-- <a routerLink="." class="nobleui-logo d-block mb-2"><span></span></a> -->
+              <!-- <h6 class="fw-bold mb-4 text-center" style="color: #96134b; font-size: 1.2rem;">
+                
+              </h6> -->
               <form  #f="ngForm" (ngSubmit)="onLoggedin(f)"  class="forms-sample">
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Usuario: </label>
@@ -30,3 +31,4 @@
     </div>
   </div>
 </div>
+<!-- </div> -->

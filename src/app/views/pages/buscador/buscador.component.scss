@@ -1,0 +1,9 @@
+.fondo-con-overlay {
+  background-image: url('/images/logos/buscador.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Para ocupar toda la pantalla */
+  padding: 40px;     /* Para que no se pegue al borde */
+//   background-color: red;
+}
