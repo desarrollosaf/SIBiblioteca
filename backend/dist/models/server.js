@@ -24,7 +24,7 @@ const auth_1 = require("../middlewares/auth");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
-        this.port = process.env.PORT || '3001';
+        this.port = process.env.PORT || '3006';
         this.midlewares();
         this.router();
         this.DBconnetc();
