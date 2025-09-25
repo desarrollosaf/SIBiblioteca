@@ -91,5 +91,9 @@ export class RegistrosComponent {
     })
   }
 
+  actDesactivaReg(id: any){
+
+  }
+
 
 }

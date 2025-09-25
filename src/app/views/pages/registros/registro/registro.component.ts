@@ -72,6 +72,7 @@ constructor(
       path_portada: [''],
       path_doc: [''],
       tipo_acceso: [''],
+      id:[''],
 
     });
 
@@ -81,6 +82,9 @@ constructor(
       this.getRegistros();
       this.getSecciones();
       this.getAccesos();
+      if(this.id != null){
+        this.editRegistro();
+      }
     }
 
   setPage(pageInfo: any) {
@@ -146,6 +150,7 @@ constructor(
 
 addRegistro(){
 const registro: Registro = {
+    id: this.formRegistro.value.id,
     id_seccion: this.formRegistro.value.id_seccion,
     id_serie: this.formRegistro.value.id_serie,
     id_subserie: this.formRegistro.value.id_subserie,
@@ -161,38 +166,38 @@ const registro: Registro = {
     fojas: this.formRegistro.value.fojas ,
     observaciones: this.formRegistro.value.observaciones ,
     estado_doc: this.formRegistro.value.estado_doc ,
-    caracteristicas_doc: this.formRegistro.value.caracteristicas_doc ,
+    caracteristicas_externas_doc: this.formRegistro.value.caracteristicas_externas_doc,
     path_portada: this.formRegistro.value.path_portada ,
     path_doc: this.formRegistro.value.path_doc ,
     tipo_acceso: this.formRegistro.value.tipo_acceso ,
-
+    
   };
 
-  // if(this.formRegistro.value.id != 0 && this.formSubserie.value.id != null){
-  //     this._subserie.updateSubserie(subserie).subscribe(data => {
-  //       Swal.fire({
-  //         title: '',
-  //         text: 'Subserie modificada correctamente',
-  //         icon: 'success',
-  //         timer: 2000,
-  //         showConfirmButton: false
-  //       }).then((result) => {
-  //         this.router.navigateByUrl('/subseries') 
-  //       })
-  //     })
-  //   }else{
-  //     this._subserie.addSubserie(subserie).subscribe(data =>{
-  //       Swal.fire({
-  //             title: '',
-  //             text: 'Subserie registrada correctamente',
-  //             icon: 'success',
-  //             timer: 2000,
-  //             showConfirmButton: false
-  //           }).then((result) => {
-  //             this.router.navigateByUrl('/subseries') 
-  //           })
-  //     })
-    // }
+  if(this.formRegistro.value.id != 0 && this.formRegistro.value.id != null){
+      this._registros.updateRegistro(registro).subscribe(data => {
+        Swal.fire({
+          title: '',
+          text: 'Registro modificada correctamente',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false
+        }).then((result) => {
+          this.router.navigateByUrl('/registros') 
+        })
+      })
+    }else{
+      this._registros.addRegistro(registro).subscribe(data =>{
+        Swal.fire({
+              title: '',
+              text: 'Registro registrada correctamente',
+              icon: 'success',
+              timer: 2000,
+              showConfirmButton: false
+            }).then((result) => {
+              this.router.navigateByUrl('/registros') 
+            })
+      })
+    }
 }
 
 getSecciones(){
@@ -242,6 +247,38 @@ getAccesos(){
           name: item.tipo
         }))
     ]
+  })
+}
+
+editRegistro(){
+  this._registros.editRegistro(this.id).subscribe({
+    next: (response: any) => {
+      this.formRegistro.setValue({
+        id_seccion: response.id_seccion,
+        id_serie: response.id_serie,
+        id_subserie: response.id_subserie,
+        clave: response.clave,
+        ubicacion: response.ubicacion,
+        anio: response.anio,
+        tomo: response.tomo,
+        num_exp: response.num_exp,
+        fecha_inicial: response.fecha_inicial,
+        fecha_final: response.fecha_final,
+        institucion: response.institucion,
+        nombre_exp: response.nombre_exp,
+        fojas: response.fojas,
+        observaciones: response.observaciones,
+        estado_doc: response.estado_doc,
+        caracteristicas_externas_doc: response.caracteristicas_externas_doc,
+        tipo_acceso: response.tipo_acceso,
+        path_portada: response.path_portada,
+        path_doc: response.path_doc,
+        id: response.id
+      })
+    },
+    error: (e: HttpErrorResponse) => {
+    console.error('Error:', e.error?.msg || e);
+    }
   })
 }
 

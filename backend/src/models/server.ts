@@ -2,6 +2,7 @@ import express, {Application} from 'express'
 import routeUser from "../routes/user";
 import routeCatalogos from "../routes/catalogos"
 import rRegistros from "../routes/registros"
+import rBuscador from "../routes/buscador"
 import cors from 'cors'
 import path from 'path';
 import cookieParser from 'cookie-parser'
@@ -32,8 +33,8 @@ class Server {
           this.app.use(routeUser);
           this.app.use(routeCatalogos);
           this.app.use(rRegistros);
+          this.app.use(rBuscador);
     }
-
 
 
     midlewares(){
@@ -48,6 +49,7 @@ class Server {
         this.app.use(function (req, res, next) {
             const publicPaths = [
                 '/api/user/login',
+                '/api/buscador',
             ];
             const isPublic = publicPaths.some(path => req.originalUrl.startsWith(path));
             if (isPublic) {
