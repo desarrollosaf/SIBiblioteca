@@ -1,5 +1,5 @@
 export interface Registro {
-    id: string;
+    id: number;
     id_seccion: number;
     id_serie: number;
     id_subserie: number;
@@ -15,7 +15,7 @@ export interface Registro {
     fojas: number;
     observaciones: string;
     estado_doc: string;
-    caracteristicas_doc: string;
+    caracteristicas_externas_doc: string;
     path_portada: string;
     path_doc: string;
     tipo_acceso: string;

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.comboAccesos = exports.comboSubseries = exports.comboSeries = exports.comboSecciones = exports.getRegistros = void 0;
+exports.editRegistro = exports.updateRegistro = exports.addRegistro = exports.comboAccesos = exports.comboSubseries = exports.comboSeries = exports.comboSecciones = exports.getRegistros = void 0;
 const registros_1 = __importDefault(require("../models/registros"));
 const secciones_1 = __importDefault(require("../models/secciones"));
 const series_1 = __importDefault(require("../models/series"));
@@ -20,7 +20,26 @@ const subseries_1 = __importDefault(require("../models/subseries"));
 const tipo_accesos_1 = __importDefault(require("../models/tipo_accesos"));
 const getRegistros = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const registros = yield registros_1.default.findAll();
+        const registros = yield registros_1.default.findAll({
+            include: [
+                {
+                    model: secciones_1.default,
+                    as: 'm_seccion'
+                },
+                {
+                    model: series_1.default,
+                    as: 'm_serie'
+                },
+                {
+                    model: subseries_1.default,
+                    as: 'm_subserie'
+                },
+                {
+                    model: tipo_accesos_1.default,
+                    as: 'm_acceso'
+                }
+            ]
+        });
         return res.json({
             data: registros
         });
@@ -84,7 +103,6 @@ const comboAccesos = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const { id } = req.params;
         const accesos = yield tipo_accesos_1.default.findAll();
-        console.log('auuuuuuuuuuuuuuuu');
         return res.json(accesos);
     }
     catch (error) {
@@ -93,3 +111,47 @@ const comboAccesos = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.comboAccesos = comboAccesos;
+const addRegistro = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { body } = req;
+        if (body.id == '') {
+            body.id = null;
+        }
+        const idReg = yield registros_1.default.create(body);
+        return res.json({
+            status: 200
+        });
+    }
+    catch (error) {
+        console.error('Error al generar consulta:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+});
+exports.addRegistro = addRegistro;
+const updateRegistro = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { body } = req;
+        const registro = yield registros_1.default.findByPk(body.id);
+        yield (registro === null || registro === void 0 ? void 0 : registro.update(body));
+        return res.json({
+            status: 200
+        });
+    }
+    catch (error) {
+        console.error('Error al generar consulta:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+});
+exports.updateRegistro = updateRegistro;
+const editRegistro = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const registro = yield registros_1.default.findByPk(id);
+        return res.json(registro);
+    }
+    catch (error) {
+        console.error('Error al generar consulta:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+});
+exports.editRegistro = editRegistro;

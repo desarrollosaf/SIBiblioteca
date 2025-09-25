@@ -64,6 +64,7 @@ export const routes: Routes = [
       }
     ]
   },
+  { path: 'buscador', loadChildren: () => import('./views/pages/buscador/buscador.routes')},
   {
     path: 'error',
     loadComponent: () => import('./views/pages/error/error.component').then(c => c.ErrorComponent),

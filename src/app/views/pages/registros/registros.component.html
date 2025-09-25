@@ -17,7 +17,7 @@
                         <input type="text" class="form-control form-control-sm" placeholder="Buscar..." (input)="updateFilter($event)" />
                     </div>
                 </div>
-                <!-- <div class="table-responsive">
+                <div class="table-responsive">
                     <div *ngIf="rows.length === 0 && !loading" class="text-center my-3">
                         <p><strong>No hay datos para mostrar</strong></p>
                     </div>
@@ -28,28 +28,39 @@
                         [offset]="page" (page)="setPage($event)" [loadingIndicator]="loading" >                  
                         <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Clasificación">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{ row.seccion}}
+                                {{ row.m_seccion.seccion}} / {{row.m_serie.serie}} / {{row.m_subserie.subserie}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Expediente / clave/ tomo">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{ row.num_exp }} / {{row.clave}} / {{ row.tomo}}
+                            </ng-template>
+                        </ngx-datatable-column>
+
+                         <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Documento">
+                            <ng-template let-row="row" ngx-datatable-cell-template>
+                                {{ row.nombre_exp}}
                             </ng-template>
                         </ngx-datatable-column>
 
                         <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Acciones">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                <button type="button" class="btn btn-sm btn-outline-dark btn-icon" data-toggle="tooltip" data-placement="top" title="Editar"   routerLink="/secciones/editSeccion/{{row.id}}" *ngIf="row.status == true">
+                                <button type="button" class="btn btn-sm btn-outline-dark btn-icon" data-toggle="tooltip" data-placement="top" title="Editar"   routerLink="/registros/editRegistro/{{row.id}}" *ngIf="row.status == true">
                                     <i class="feather icon-edit"></i>
                                 </button>  
 
-                                 <button type="button" class="btn btn-sm btn-outline-dark btn-icon" data-toggle="tooltip" data-placement="top" title="Desactivar" (click)="actDesactiva(row.id)"  *ngIf="row.status == true">
+                                 <button type="button" class="btn btn-sm btn-outline-dark btn-icon" data-toggle="tooltip" data-placement="top" title="Desactivar" (click)="actDesactivaReg(row.id)"  *ngIf="row.status == true">
                                     <i class="feather icon-trash"></i>
                                 </button>
 
-                                 <button type="button" class="btn btn-sm btn-outline-dark btn-icon" data-toggle="tooltip" data-placement="top" title="Activar" (click)="actDesactiva(row.id)" *ngIf="row.status == false">
+                                 <button type="button" class="btn btn-sm btn-outline-dark btn-icon" data-toggle="tooltip" data-placement="top" title="Activar" (click)="actDesactivaReg(row.id)" *ngIf="row.status == false">
                                     <i class="feather icon-check"></i>
                                 </button> 
                             </ng-template>
                         </ngx-datatable-column>
                     </ngx-datatable>
 
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
