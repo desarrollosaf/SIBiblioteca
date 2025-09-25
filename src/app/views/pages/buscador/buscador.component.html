@@ -23,8 +23,8 @@
                         <div *ngIf="resultados?.length > 0">
                             <h5 style="text-align: center;">Resultados encontrados:</h5><br>
                             <div class="row">
-                                <div *ngFor="let item of resultados" class="resultado-item col-md-4">
-                                    <div class="col-md-12"  style="border: 2px solid rgb(41, 41, 43); border-radius: 20px; padding: 10px; background-color: rgb(238, 233, 233);">
+                                <div *ngFor="let item of resultados" class="resultado-item col-md-4 ">
+                                    <div class="col-md-12 fondo"  style="border: 2px solid rgb(41, 41, 43); border-radius: 20px; padding: 10px; background-color: rgb(238, 233, 233);">
                                         <p style="text-align: center;"><strong>{{ item.nombre_exp }}</strong></p>
                                         <p><strong>Clasificación:</strong> {{ item.m_seccion.seccion }} / {{item.m_serie.serie}} / {{item.m_subserie.subserie}}</p>
                                         <p><strong>Clave:</strong> {{ item.clave }}</p>
