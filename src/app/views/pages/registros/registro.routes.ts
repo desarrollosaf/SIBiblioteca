@@ -13,6 +13,7 @@ export default[
         path: 'editRegistro/:id',
         loadComponent: () => import('./registro/registro.component').then(c => c.RegistroComponent)
     },
+
     // {
     //     path: 'bajaPersonal/:id',
     //     loadComponent: () => import('./detalles/detalles.component').then(c => c.DetallesComponent)

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Registro } from '../interfases/registro';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,20 @@ export class RegistrosService {
     getAccesos():Observable<[]>{
       const url = `${this.myAppUrl}${this.myAPIUrl}/comboAccesos`;
       return this.http.get<[]>(url)
+    }
+
+    addRegistro(registro: Registro){
+       const url = `${this.myAppUrl}${this.myAPIUrl}/addRegistro`;
+    return this.http.post(url,registro)
+    }
+
+    updateRegistro(registro: Registro){
+       const url = `${this.myAppUrl}${this.myAPIUrl}/updateRegistro`;
+    return this.http.post(url,registro)
+    }
+
+    editRegistro(id: any){
+      const url = `${this.myAppUrl}${this.myAPIUrl}/editRegistro/${id}`;
+      return this.http.get(url)
     }
 }
