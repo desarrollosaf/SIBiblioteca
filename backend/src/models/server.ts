@@ -41,7 +41,7 @@ class Server {
         //Parseo BOdy
         this.app.use(express.json())
          this.app.use(cors({
-            origin: 'http://localhost:4200',
+            origin: 'https://bibliolex.gob.mx',
             credentials: true
         }))
         this.app.use(cookieParser());

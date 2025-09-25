@@ -8,7 +8,7 @@ import { Subseries } from '../interfases/subseries';
 })
 export class SubseriesService {
 
-  private myAppUrl: string = 'http://localhost:3001/';
+  private myAppUrl: string = 'https://bibliolex.gob.mx/repositorio/backend/';
   private myAPIUrl: string = 'api/catalogos';
 
   constructor(private http: HttpClient) { 

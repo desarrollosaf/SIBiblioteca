@@ -7,7 +7,7 @@ import { Registro } from '../interfases/registro';
   providedIn: 'root'
 })
 export class RegistrosService {
-  private myAppUrl: string = 'http://localhost:3001/';
+  private myAppUrl: string = 'https://bibliolex.gob.mx/repositorio/backend/';
   private myAPIUrl: string = 'api/registros';
 
   constructor(private http: HttpClient) {

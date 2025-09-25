@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    appUrl: 'http://localhost:3001/'
+    appUrl: 'https://bibliolex.gob.mx/repositorio/backend/'
 };
