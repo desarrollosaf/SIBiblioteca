@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BuscadorService {
 
-  private myAppUrl: string = 'http://localhost:3001/';
+  private myAppUrl: string = 'https://bibliolex.gob.mx/repositorio/backend/';
   private myAPIUrl: string = 'api/buscador/';
 
 

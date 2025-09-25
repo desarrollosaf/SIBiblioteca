@@ -15,7 +15,7 @@ export class UserService {
   private http = inject( HttpClient );
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
-  private myAppUrl: string = 'http://localhost:3001/';
+  private myAppUrl: string = 'https://bibliolex.gob.mx/repositorio/backend/';
 
   constructor() { 
     // this.myAppUrl =  environment.appUrl;

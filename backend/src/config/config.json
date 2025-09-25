@@ -1,9 +1,9 @@
 {
   "development": {
-     "username": "root",
-     "password": "",
-     "database": "biblioteca",
-     "host": "localhost",
+     "username": "usr_sibiblioteca",
+     "password": "NkDSkgvIVrLxhPzvf5Hq",
+     "database": "adminplem_sibiblioteca",
+     "host": "192.168.36.53",
      "dialect": "mysql"
   },
   "production": {
