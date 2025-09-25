@@ -8,6 +8,10 @@ import{
 } from 'sequelize';
 
 import sequelize from '../database/connectionBiblioteca';
+import Secciones from './secciones';
+import Series from './series';
+import Subseries from './subseries';
+import TipoAcceso from './tipo_accesos';
 
 class Registros extends Model<
   InferAttributes<Registros>,
@@ -41,24 +45,24 @@ class Registros extends Model<
         {
             id:{
                 autoIncrement: true,
-                type: DataTypes.BIGINT.UNSIGNED,
+                type: DataTypes.INTEGER,
                 allowNull: false,
                 primaryKey: true
             }, 
             id_seccion:{
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             id_serie:{
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             id_subserie:{
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             clave:{
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             ubicacion:{
@@ -66,15 +70,15 @@ class Registros extends Model<
                 allowNull: false
             },
             anio:{
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             tomo:{
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             num_exp:{
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             fecha_inicial:{
@@ -94,7 +98,7 @@ class Registros extends Model<
                 allowNull: false
             },
             fojas:{
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             observaciones:{
@@ -118,7 +122,7 @@ class Registros extends Model<
                 allowNull: false
             },
             tipo_acceso:{
-                type: DataTypes.NUMBER,
+                type: DataTypes.INTEGER,
                 allowNull: false
             },
             status:{
@@ -143,4 +147,21 @@ class Registros extends Model<
         }
     );
             
+
+    Registros.belongsTo(Secciones, {
+        foreignKey: "id_seccion", as: "m_seccion"
+    }) 
+
+    Registros.belongsTo(Series, {
+        foreignKey: "id_serie", as: "m_serie"
+    }) 
+
+    Registros.belongsTo(Subseries, {
+        foreignKey: "id_subserie", as: "m_subserie"
+    }) 
+
+    Registros.belongsTo(TipoAcceso, {
+        foreignKey: "tipo_acceso", as: "m_acceso"
+    }) 
+
 export default Registros;

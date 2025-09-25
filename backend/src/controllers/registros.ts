@@ -5,10 +5,30 @@ import Secciones from "../models/secciones";
 import Series from "../models/series";
 import Subseries from "../models/subseries";
 import TipoAcceso from "../models/tipo_accesos";
+import { DataTypes } from "sequelize";
 
 export const getRegistros = async (req: Request, res: Response): Promise<any> => {
     try {
-        const registros = await Registros.findAll();
+        const registros = await Registros.findAll({
+            include:[
+                { 
+                    model: Secciones,
+                    as: 'm_seccion'
+                },
+                { 
+                    model: Series,
+                    as: 'm_serie'
+                },
+                { 
+                    model: Subseries,
+                    as: 'm_subserie'
+                },
+                { 
+                    model: TipoAcceso,
+                    as: 'm_acceso'
+                }
+            ]
+        });
 
         return res.json({
             data: registros
@@ -75,7 +95,6 @@ export const comboAccesos = async (req: Request, res: Response): Promise<any> =>
     try {
         const { id } = req.params;
         const accesos = await TipoAcceso.findAll();
-console.log('auuuuuuuuuuuuuuuu')
         return res.json(accesos)
 
     } catch (error) {
@@ -84,5 +103,52 @@ console.log('auuuuuuuuuuuuuuuu')
     }
 }
 
+export const addRegistro = async (req: Request, res: Response): Promise<any> => {
+    try {
+            const { body } = req
+            if(body.id == ''){
+                body.id =  null
+            }
+            const idReg = await Registros.create(body)
+    
+            return res.json({
+                status: 200
+            });
 
+    } catch (error) {
+        console.error('Error al generar consulta:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
+
+export const updateRegistro = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { body } = req
+        const registro = await Registros.findByPk(body.id);
+        await registro?.update(body)
+
+        return res.json({
+            status: 200
+        });
+
+    } catch (error) {
+        console.error('Error al generar consulta:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
+
+
+
+export const editRegistro = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { id } = req.params;
+        const registro = await Registros.findByPk(id);
+
+        return res.json( registro );
+
+    } catch (error) {
+        console.error('Error al generar consulta:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
 
