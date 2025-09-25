@@ -35,12 +35,13 @@ export class ThemeModeService {
       return storedTheme;
     }
 
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'light';
   }
 
   setTheme = (theme: string) => {
     this.currentTheme.next(theme);
-    document.documentElement.setAttribute('data-bs-theme', theme);
+    document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches? 'light': 'light');
+    // document.documentElement.setAttribute('data-bs-theme', theme);
   }
 
   toggleTheme(theme: string) {
