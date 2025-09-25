@@ -47,7 +47,7 @@ export class FormSeccionComponent {
   }
 
   ngOnInit(): void {
-    this.getSecciones();
+    this.getSeries();
     if(this.id != null){
         this.editSubserie();
     }
