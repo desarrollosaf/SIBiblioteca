@@ -30,10 +30,10 @@ class Server {
     }
 
     router(){
-          this.app.use(routeUser);
-          this.app.use(routeCatalogos);
-          this.app.use(rRegistros);
-          this.app.use(rBuscador);
+        this.app.use(routeUser);
+        this.app.use(routeCatalogos);
+        this.app.use(rRegistros);
+        this.app.use(rBuscador);
     }
 
 
