@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
     selector: 'app-login',
     imports: [
       // NgStyle,
-      RouterLink,
+      // RouterLink,
       FormsModule
     ],
     templateUrl: './login.component.html',

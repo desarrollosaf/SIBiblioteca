@@ -2,17 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subseries } from '../interfases/subseries';
+import { environment } from '../../enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubseriesService {
 
-  private myAppUrl: string = 'https://bibliolex.gob.mx/repositorio/backend/';
+  // private myAppUrl: string = 'http://localhost:3006/';
+  private myAppUrl: string;
   private myAPIUrl: string = 'api/catalogos';
 
   constructor(private http: HttpClient) { 
-
+    this.myAppUrl = environment.appUrl;
   }
 
     getSubseries():Observable<[]>{

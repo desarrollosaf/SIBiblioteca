@@ -43,7 +43,7 @@
                                         <p><strong>Tipo de acceso:</strong> {{ item.m_acceso.tipo }}</p>
                                         <hr>
                                         <div class="d-flex justify-content-center mt-3">
-                                            <button type="submit" class="btn btn-primary btn-icon-text">Solicitar visualización</button>
+                                            <button type="submit" class="btn btn-primary btn-icon-text" (click)="openSmModal(smModal, item.id)">Solicitar visualización</button>
                                         </div>
                                     </div>
                                 </div>
@@ -55,6 +55,66 @@
                             <h5 style="text-align: center;">No se encontraron resultados.</h5>
                         </div>
                     </div>
+
+                    <ng-template #smModal let-modal>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Registro de solicitud </h5>
+                            <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="formSolicitud" (ngSubmit)="addSolicitud()" class="forms-sample">
+                                <div class="row">
+                                    <div class="col-md-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label> Nombre completo: </label>
+                                                        <input type="hidden" formControlName="idRegistro" class="form-control">
+                                                        <input type="text" formControlName="nombre_completo" class="form-control">
+                                                        <div *ngIf="nombre?.invalid && (nombre?.dirty || nombre?.touched)" class="text-danger">
+                                                            <div *ngIf="nombre?.errors?.['required']">El nombre es obligatorio.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label> Telefono: </label>
+                                                        <input type="text" formControlName="telefono" class="form-control">
+                                                        <div *ngIf="telefono?.invalid&& (telefono?.dirty|| telefono?.touched)" class="text-danger">
+                                                            <div *ngIf="telefono?.errors?.['required']">El telefóno es obligatorio.</div>
+                                                            <div *ngIf="telefono?.errors?.['maxlength']">Máximo {{ telefono?.errors?.['maxlength'].requiredLength }} digitos.</div>
+                                                            <div *ngIf="telefono?.errors?.['minlength']">Mínimo {{ telefono?.errors?.['mixlength'].requiredlength }} digitos.</div>
+                                                            <div *ngIf="telefono?.errors?.['pattern']">Solo se permiten números</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label> Correo electrónico: </label>
+                                                        <input type="text" formControlName="correo" class="form-control">
+                                                        <div *ngIf="correo?.invalid && (correo?.dirty || correo?.touched)" class="text-danger">
+                                                            <div *ngIf="correo?.errors?.['required']">El correo es obligatorio.</div>
+                                                            <div *ngIf="correo?.errors?.['email']">El formato del correo no es válido.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label> Confirma correo electrónico: </label>
+                                                        <input type="text" formControlName="confirma_correo" class="form-control">
+                                                    </div>
+                                                    <div *ngIf="formSolicitud.errors?.correosNoCoinciden && formSolicitud.touched" class="text-danger">
+                                                        Los correos no coinciden
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Cancelar</button>
+                            <button type="submit" (click)="addSolicitud()" [disabled]="formSolicitud.invalid" class="btn btn-primary btn-icon-text">Guardar</button>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
         </div>

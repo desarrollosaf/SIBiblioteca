@@ -15,10 +15,11 @@ export class UserService {
   private http = inject( HttpClient );
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
-  private myAppUrl: string = 'https://bibliolex.gob.mx/repositorio/backend/';
+  // private myAppUrl: string = 'http://localhost:3006/';
+  private myAppUrl: string;
 
   constructor() { 
-    // this.myAppUrl =  environment.appUrl;
+    this.myAppUrl =  environment.appUrl;
     this.myAPIUrl = 'api/user';
 
     const storedUser = localStorage.getItem('currentUser');
