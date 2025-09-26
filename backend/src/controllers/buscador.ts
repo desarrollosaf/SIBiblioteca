@@ -4,6 +4,9 @@ import Secciones from "../models/secciones";
 import Series from "../models/series";
 import Subseries from "../models/subseries";
 import TipoAcceso from "../models/tipo_accesos";
+import User from "../models/user";
+import Usuarios from "../models/usuarios";
+import Solicitudes from "../models/solicitudes";
 
 
 export const buscar = async (req: Request, res: Response): Promise<any> => {
@@ -50,6 +53,56 @@ export const buscar = async (req: Request, res: Response): Promise<any> => {
         return res.json(registros);
     } catch (error) {
         console.error('Error al generar consulta:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
+
+export const addSolicitud = async (req: Request, res: Response): Promise<any> => {
+    try {
+            const {body} = req
+            const bcrypt = require('bcrypt'); 
+            const correo = await Usuarios.findOne({
+                where:{
+                    correo: body.correo
+                }
+            });
+            if(!correo){
+            //crea usuario 
+                const saltRounds = 10; 
+                const psww = body.correo;
+                const hash = await bcrypt.hash(psww, saltRounds);
+                const idUsuario = Usuarios.create({
+                    nombre_completo: body.nombre_completo,
+                    telefono: body.telefono,
+                    correo: body.correo,
+                    psw: hash
+                })
+               Solicitudes.create({
+                    id_usuario: (await idUsuario).id,
+                    id_registro: body.id_registro,
+                });
+            }else{
+
+                const existeSolicitud = await Solicitudes.findOne({
+                    where:{
+                        id_usuario: correo.id,
+                        id_registro: body.id_registro
+                    }
+                })
+
+                if(!existeSolicitud){
+                    const idUs = correo.id;
+                    Solicitudes.create({
+                        id_usuario: idUs,
+                        id_registro: body.id_registro,
+                    });
+                    return res.json(200);
+                }else{
+                    return res.json(300);
+                }
+            }
+    } catch (error) {
+        console.error('Error al guardar seccion:', error);
         return res.status(500).json({ msg: 'Error interno del servidor'});
     }
 }
