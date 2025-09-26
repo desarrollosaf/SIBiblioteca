@@ -12,12 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buscar = void 0;
+exports.addSolicitud = exports.buscar = void 0;
 const registros_1 = __importDefault(require("../models/registros"));
 const secciones_1 = __importDefault(require("../models/secciones"));
 const series_1 = __importDefault(require("../models/series"));
 const subseries_1 = __importDefault(require("../models/subseries"));
 const tipo_accesos_1 = __importDefault(require("../models/tipo_accesos"));
+const usuarios_1 = __importDefault(require("../models/usuarios"));
+const solicitudes_1 = __importDefault(require("../models/solicitudes"));
 const buscar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { Op } = require('sequelize');
@@ -65,3 +67,54 @@ const buscar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.buscar = buscar;
+const addSolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { body } = req;
+        const bcrypt = require('bcrypt');
+        const correo = yield usuarios_1.default.findOne({
+            where: {
+                correo: body.correo
+            }
+        });
+        if (!correo) {
+            //crea usuario 
+            const saltRounds = 10;
+            const psww = body.correo;
+            const hash = yield bcrypt.hash(psww, saltRounds);
+            const idUsuario = usuarios_1.default.create({
+                nombre_completo: body.nombre_completo,
+                telefono: body.telefono,
+                correo: body.correo,
+                psw: hash
+            });
+            solicitudes_1.default.create({
+                id_usuario: (yield idUsuario).id,
+                id_registro: body.id_registro,
+            });
+        }
+        else {
+            const existeSolicitud = yield solicitudes_1.default.findOne({
+                where: {
+                    id_usuario: correo.id,
+                    id_registro: body.id_registro
+                }
+            });
+            if (!existeSolicitud) {
+                const idUs = correo.id;
+                solicitudes_1.default.create({
+                    id_usuario: idUs,
+                    id_registro: body.id_registro,
+                });
+                return res.json(200);
+            }
+            else {
+                return res.json(300);
+            }
+        }
+    }
+    catch (error) {
+        console.error('Error al guardar seccion:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+});
+exports.addSolicitud = addSolicitud;

@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { buscar } from "../controllers/buscador";
+import { addSolicitud, buscar } from "../controllers/buscador";
 
 const router = Router();
 
 router.get("/api/buscador/:id", buscar)
+router.post("/api/buscador/solicitud/addSolicitud", addSolicitud)
 
 
 
