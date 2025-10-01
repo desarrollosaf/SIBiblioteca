@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.cerrarsesion = exports.getCurrentUser = exports.LoginUser = exports.ReadUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const users_1 = __importDefault(require("../models/saf/users"));
+const roles_1 = __importDefault(require("../models/roles"));
+const role_user_1 = __importDefault(require("../models/role_user"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const ReadUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const listUser = yield users_1.default.findAll();
@@ -28,10 +30,25 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     const { rfc, password } = req.body;
     let passwordValid = false;
     let user = null;
+    let role_user = null;
     let bandera = true;
     user = yield users_1.default.findOne({
         where: { rfc: rfc },
     });
+    role_user = yield role_user_1.default.findOne({
+        where: { user_id: user.id },
+        include: [
+            {
+                model: roles_1.default,
+                as: 'role',
+            },
+        ],
+    });
+    if (!role_user) {
+        return res.status(400).json({
+            msg: `Sin permiso`
+        });
+    }
     if (!user) {
         return res.status(400).json({
             msg: `Usuario no existe con el rfc ${rfc}`
@@ -52,7 +69,7 @@ const LoginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         maxAge: 2 * 60 * 60 * 1000,
         path: '/',
     });
-    return res.json({ user, bandera });
+    return res.json({ user, bandera, role_user });
 });
 exports.LoginUser = LoginUser;
 const getCurrentUser = (req, res) => {

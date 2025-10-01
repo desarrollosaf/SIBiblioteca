@@ -1,9 +1,9 @@
 {
   "development": {
-     "username": "root",
-     "password": "",
-     "database": "biblioteca",
-     "host": "localhost",
+     "username": "homestead",
+     "password": "secret",
+     "database": "bibliotecaV2",
+     "host": "192.168.10.10",
      "dialect": "mysql"
   },
   "production": {

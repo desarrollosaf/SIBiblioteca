@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcrypt'
 import  User  from '../models/saf/users'
-import  UserBase  from '../models/user'
+import Role from '../models/roles';
+import  RoleUsers  from '../models/role_user'
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
@@ -19,11 +20,30 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
     const { rfc, password } = req.body;
     let passwordValid = false;
     let user: any = null;
+    let role_user: any = null;
     let bandera = true;
 
     user = await User.findOne({ 
         where: { rfc: rfc },
     })
+
+    role_user = await RoleUsers.findOne({ 
+        where: { user_id: user.id } ,
+        include: [
+            {
+                model: Role,
+                as: 'role',
+            },
+        ],
+    
+    });
+
+    if (!role_user) {
+        return res.status(400).json({
+            msg: `Sin permiso`
+        })
+    }
+
     if (!user) {
         return res.status(400).json({
             msg: `Usuario no existe con el rfc ${rfc}`
@@ -54,7 +74,7 @@ export const LoginUser = async (req: Request, res: Response, next: NextFunction)
         path: '/',
     });
         
-    return res.json({ user,bandera })
+    return res.json({ user,bandera,role_user })
 }
 
 export const getCurrentUser = (req: Request, res: Response) => {
