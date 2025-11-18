@@ -1,3 +1,4 @@
+<!-- HERO BUSCADOR -->
 <section class="hero-books">
   <div class="hero-books-inner">
     <div class="hero-books-text">
@@ -7,13 +8,18 @@
         lecturas con un solo clic.
       </p>
 
-      <form [formGroup]="formRegistros" class="hero-books-form">
-        <input type="text" formControlName="busqueda" (keyup)="buscar()" class="form-control"  placeholder="Escribe el título, autor o tema...">
+      <form class="hero-books-form" [formGroup]="formRegistros">
+        <input
+          type="text"
+          placeholder="Escribe el título, autor o tema..."
+          name="q"
+          (keyup)="buscar()"
+        />
         <button type="submit">Buscar libro</button>
       </form>
 
       <div class="hero-books-meta">
-        <span>📚 Más de 1,000 ejemplares registrados</span>
+        <span>📚 Más de 10,000 ejemplares registrados</span>
         <span>⏱ Búsqueda rápida por palabras clave</span>
       </div>
     </div>
@@ -28,5 +34,67 @@
       </div>
       <p>Catálogo digital del sistema de biblioteca</p>
     </div>
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<section class="results-section" *ngIf="resultados && resultados.length">
+  <div class="results-inner">
+    <div class="results-header">
+      <h2>Resultados encontrados</h2>
+      <span>{{ resultados.length }} registro(s)</span>
+    </div>
+
+    <div class="results-grid">
+      <!-- Tarjeta por registro -->
+      <article class="record-card" *ngFor="let item of resultados">
+        <!-- Encabezado de la tarjeta -->
+        <header class="record-header">
+          {{ item.titulo || 'BIBLIOLEX' }}
+        </header>
+
+        <!-- Cuerpo con datos -->
+        <div class="record-body">
+          <div class="record-columns">
+            <div class="record-col">
+              <p><strong>Clasificación:</strong> {{ item.clasificacion }}</p>
+              <p><strong>Clave:</strong> {{ item.clave }}</p>
+              <p><strong>Ubicación:</strong> {{ item.ubicacion }}</p>
+              <p><strong>Año:</strong> {{ item.anio }}</p>
+              <p><strong>Tomo:</strong> {{ item.tomo }}</p>
+              <p><strong>Número de expediente:</strong> {{ item.numeroExpediente }}</p>
+              <p><strong>Fecha inicial:</strong> {{ item.fechaInicial | date:'dd/MM/yyyy' }}</p>
+              <p><strong>Fecha final:</strong> {{ item.fechaFinal | date:'dd/MM/yyyy' }}</p>
+            </div>
+
+            <div class="record-col">
+              <p><strong>Institución:</strong> {{ item.institucion }}</p>
+              <p><strong>Fojas:</strong> {{ item.fojas }}</p>
+              <p><strong>Observaciones:</strong> {{ item.observaciones }}</p>
+              <p><strong>Estado documento:</strong> {{ item.estadoDocumento }}</p>
+              <p><strong>Características:</strong> {{ item.caracteristicas }}</p>
+              <p><strong>Tipo de acceso:</strong> {{ item.tipoAcceso }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón -->
+        <footer class="record-footer">
+          <button type="button" >
+            Solicitar visualización
+          </button>
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Mensaje cuando ya buscó y no hay resultados (opcional) -->
+<section
+  class="results-section empty"
+  *ngIf="resultados && resultados.length === 0 "
+>
+  <div class="results-inner results-empty">
+    <p>No se encontraron resultados para "<strong></strong>".</p>
   </div>
 </section>

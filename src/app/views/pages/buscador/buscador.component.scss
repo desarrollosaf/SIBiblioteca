@@ -2,17 +2,19 @@
   display: block;
 }
 
-/* Fondo general tipo hero */
+/* ==========================
+   SECCIÓN HERO BUSCADOR
+   ========================== */
+
 .hero-books {
-  min-height: 70vh;
+  min-height: 65vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1.5rem;
+  padding: 3rem 1.5rem 2rem;
   background: radial-gradient(circle at top, #fdf2df 0, #ffffff 40%, #f9f3ea 100%);
 }
 
-/* Tarjeta principal */
 .hero-books-inner {
   max-width: 1100px;
   width: 100%;
@@ -26,7 +28,6 @@
   border: 1px solid rgba(214, 186, 145, 0.5);
 }
 
-/* Texto principal */
 .hero-books-text h1 {
   margin: 0;
   font-size: 2rem;
@@ -82,7 +83,7 @@
   filter: brightness(1.05);
 }
 
-/* Textos de apoyo */
+/* Metadatos */
 .hero-books-meta {
   margin-top: 1.3rem;
   display: flex;
@@ -145,10 +146,18 @@
   color: #8b6a42;
   text-align: center;
 }
-/* Contenedor general de resultados */
+
+/* ==========================
+   RESULTADOS
+   ========================== */
+
 .results-section {
   padding: 2rem 1.5rem 3rem;
   background: #fdf7ef;
+}
+
+.results-section.empty {
+  padding-top: 1rem;
 }
 
 .results-inner {
@@ -156,7 +165,6 @@
   margin: 0 auto;
 }
 
-/* Header de resultados */
 .results-header {
   display: flex;
   justify-content: space-between;
@@ -175,107 +183,120 @@
   color: #8a6a41;
 }
 
-/* Grid de tarjetas */
+/* Grid para múltiples tarjetas */
 .results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.5rem;
 }
 
-/* Tarjeta individual */
-.result-card {
-  position: relative;
-  border-radius: 20px;
+/* Tarjeta tipo expediente */
+.record-card {
+  background: #fbf4e9;
+  border-radius: 22px;
+  border: 2px solid #d8c3a4;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(214, 186, 145, 0.6);
   display: flex;
   flex-direction: column;
 }
 
-/* Franja de arriba tipo degradado */
-.result-card-top {
-  height: 32px;
-  background: linear-gradient(135deg, #f6e0c2, #e8c79a);
-}
-
-/* Cuerpo */
-.result-card-body {
-  padding: 1.2rem 1.4rem 0.6rem;
-}
-
-.result-card-body h3 {
-  margin: 0 0 0.9rem;
+/* Encabezado de tarjeta */
+.record-header {
   text-align: center;
-  font-size: 1rem;
-  letter-spacing: 0.05em;
-  color: #5a2c0b;
-  text-transform: uppercase;
+  background: #f3e5d2;
+  padding: 0.9rem 0.7rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #4b270b;
+  border-bottom: 1px solid #d8c3a4;
+  letter-spacing: 0.03em;
 }
 
-/* Datos en lista */
-.result-data {
-  margin: 0;
-  padding: 0;
+/* Cuerpo de tarjeta */
+.record-body {
+  padding: 1.1rem 1.4rem 0.7rem;
+  font-size: 0.9rem;
+  color: #3b2a17;
 }
 
-.result-data > div {
-  display: flex;
-  font-size: 0.86rem;
-  margin-bottom: 0.25rem;
+.record-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.75rem 1.5rem;
 }
 
-.result-data dt {
+.record-col p {
+  margin: 0.2rem 0;
+  line-height: 1.25rem;
+}
+
+.record-col strong {
   font-weight: 600;
-  color: #6b4b24;
-  margin-right: 0.25rem;
-  white-space: nowrap;
+  color: #5a3a18;
 }
 
-.result-data dd {
-  margin: 0;
-  color: #444;
-}
-
-/* Pie de tarjeta */
-.result-card-footer {
-  padding: 0.9rem 1.4rem 1.1rem;
+/* Footer / botón */
+.record-footer {
+  padding: 0.9rem 1.3rem 1.1rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
-.result-card-footer button {
-  border-radius: 999px;
+.record-footer button {
+  background: #b0184a;
   border: none;
-  padding: 0.55rem 1.4rem;
-  font-size: 0.85rem;
-  background: linear-gradient(135deg, #c0185a, #8e0241);
+  padding: 0.6rem 1.8rem;
+  border-radius: 14px;
   color: #fff;
   font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.15s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
 }
 
-.result-card-footer button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
-  filter: brightness(1.02);
+.record-footer button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
 }
 
+/* Mensaje vacío */
+.results-empty {
+  text-align: center;
+  color: #6e5a3b;
+  font-size: 0.95rem;
+}
 
-/* Responsivo */
+/* ==========================
+   RESPONSIVO
+   ========================== */
+
 @media (max-width: 900px) {
   .hero-books-inner {
     grid-template-columns: 1fr;
     padding: 2.1rem 1.6rem;
   }
 
-  .hero-books-text h1 {
-    font-size: 1.7rem;
-  }
-
   .hero-books-illustration {
     order: -1; /* La ilustración pasa arriba en móvil */
+  }
+}
+
+@media (max-width: 600px) {
+  .results-section {
+    padding-inline: 1rem;
+  }
+
+  .record-body {
+    padding-inline: 1rem;
+  }
+
+  .record-footer {
+    padding-inline: 1rem;
+  }
+
+  .record-columns {
+    grid-template-columns: 1fr; /* columnas se apilan en móvil */
   }
 }
