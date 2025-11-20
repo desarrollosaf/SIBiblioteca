@@ -37,6 +37,22 @@ export const MENU: MenuItem[] = [
             label: 'Registro',
             link: '/registros'
           },
+          {
+            label: 'Solicitudes',
+            isTitle: true,
+          },
+          {
+            label: 'Pendientes',
+            link: '/solPendiente'
+          },
+          {
+            label: 'Aprobadas',
+            link: '/registros'
+          },
+          {
+            label: 'Rechazadas',
+            link: '/registros'
+          },
         ],
         
       },

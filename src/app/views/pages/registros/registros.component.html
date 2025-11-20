@@ -4,13 +4,22 @@
         <div class="card">
             <div class="card-body">
                 <h4> Registro</h4><br>
-
-                <a routerLink="/registros/createRegistro">
-                    <button type="button" class="btn btn-primary btn-icon-text">
-                    <i class="btn-icon-prepend" data-feather="plus-circle"></i>
-                        Agregar registro
-                    </button>
-                </a>
+                <div class="row align-items-center mb-3">
+                    <a routerLink="/registros/createRegistro">
+                        <button type="button" class="btn btn-primary btn-icon-text">
+                        <i class="btn-icon-prepend" data-feather="plus-circle"></i>
+                            Agregar registro
+                        </button>
+                    </a>
+                </div>
+                <div class="row align-items-center mb-3">
+                    <a routerLink="/registros/cargarCsv">
+                        <button type="button" class="btn btn-primary btn-icon-text">
+                        <i class="btn-icon-prepend" data-feather="plus-circle"></i>
+                            Cargar CSV
+                        </button>
+                    </a>
+                </div>      
                 <br><br>
                 <div class="row align-items-center mb-3">
                     <div class="col-xl-3 col-md-4">
@@ -28,12 +37,12 @@
                         [offset]="page" (page)="setPage($event)" [loadingIndicator]="loading" >                  
                         <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Clasificación">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{ row.m_seccion.seccion}} / {{row.m_serie.serie}} / {{row.m_subserie.subserie}}
+                                {{ row.m_seccion?.seccion}} / {{row.m_serie?.serie}} / {{row.m_subserie?.subserie}}
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Expediente / clave/ tomo">
+                        <ngx-datatable-column [headerClass]="'text-center'" [cellClass]="'text-center'" name="Tomo/Expediente">
                             <ng-template let-row="row" ngx-datatable-cell-template>
-                                {{ row.num_exp }} / {{row.clave}} / {{ row.tomo}}
+                                {{ row.tomo }} / {{row.num_exp}}
                             </ng-template>
                         </ngx-datatable-column>
 

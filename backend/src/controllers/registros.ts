@@ -5,7 +5,10 @@ import Secciones from "../models/secciones";
 import Series from "../models/series";
 import Subseries from "../models/subseries";
 import TipoAcceso from "../models/tipo_accesos";
-import { DataTypes } from "sequelize";
+import  DataTypes, { DATE }  from "sequelize";
+import { parse } from "csv-parse";
+import fs from 'fs';
+import path, { format } from 'path';
 
 export const getRegistros = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -29,7 +32,6 @@ export const getRegistros = async (req: Request, res: Response): Promise<any> =>
                 }
             ]
         });
-
         return res.json({
             data: registros
         });
@@ -152,3 +154,77 @@ export const editRegistro = async (req: Request, res: Response): Promise<any> =>
     }
 }
 
+export const addCsv = async (req: Request, res: Response): Promise<any> => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ msg: 'No se envió archivo' });
+        }
+
+        const csvContent = req.file.buffer.toString('utf-8');
+        const records: any[] = [];
+        parse(csvContent, {
+            delimiter: ',',
+            columns: false,  // usa la primera fila como encabezados
+            skip_empty_lines: true
+        })
+
+        .on('data', (row) => {
+            records.push(row);
+        })
+
+        .on('end', async () => {
+            for (const element of records) {
+        
+                const fechaInicial = parseFecha(element[3]);
+                const fechaFinal   = parseFecha(element[4]);
+                const registro = {
+                    anio: element[0] ? parseInt(element[0]) : null,
+                    tomo: element[1] || null,
+                    num_exp: element[2] || null,
+                    fecha_inicial: fechaInicial,
+                    fecha_final: fechaFinal,
+                    institucion: element[5] || null,
+                    nombre_exp: element[6] || null,
+                    fojas: element[7] ? parseInt(element[7]) : null,
+                    observaciones: element[8] || null,
+                    estado_doc: element[9] || null,
+                    caracteristicas_externas_doc: element[10] || null,
+                    estado: element[11] || null,
+                    path_portada: element[12] || null,
+                    path_doc: element[13] || null, 
+                    tipo_acceso: 2,
+                    status: true
+                };
+                if(registro.tomo != '' && registro.tomo != null){
+                    registro.tomo = registro.tomo.match(/\d+/)[0];
+                }
+                if(registro.num_exp != '' && registro.num_exp != null){
+                    registro.num_exp = registro.num_exp.match(/\d+/)[0];
+                }
+                if (registro.tomo != null && registro.num_exp != null){
+                    const rutaArchivo = path.join(__dirname, `../../storage/tomos/Tomo ${ registro.tomo}-${registro.anio}/PDFs` , `Exp ${registro.num_exp}.pdf`);
+                    if (fs.existsSync(rutaArchivo)) {
+                        registro.path_doc = rutaArchivo;
+                    } 
+                }
+                await  Registros.create(registro);
+            }
+            res.json({ msg: 'CSV guardado correctamente' });
+        });
+    } catch (error) {
+        console.error('Error al cargar csv:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor'});
+    }
+}
+
+function parseFecha(fecha: string | null): Date | null {
+    if (!fecha || fecha.trim() === "") return null;
+
+    const partes = fecha.trim().split('/');
+    if (partes.length !== 3) return null;
+
+    const [dia, mes, anio] = partes.map(p => parseInt(p));
+    if (!dia || !mes || !anio) return null;
+
+    return new Date(anio, mes - 1, dia);
+}

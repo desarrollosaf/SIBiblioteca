@@ -26,7 +26,7 @@
                                 <div *ngFor="let item of resultados" class="resultado-item col-md-4 ">
                                     <div class="col-md-12 fondo"  style="border: 2px solid rgb(41, 41, 43); border-radius: 20px; padding: 10px; background-color: rgb(238, 233, 233);">
                                         <p style="text-align: center;"><strong>{{ item.nombre_exp }}</strong></p>
-                                        <p><strong>Clasificación:</strong> {{ item.m_seccion.seccion }} / {{item.m_serie.serie}} / {{item.m_subserie.subserie}}</p>
+                                        <p><strong>Clasificación:</strong> {{ item.m_seccion?.seccion }} / {{item.m_serie?.serie}} / {{item.m_subserie?.subserie}}</p>
                                         <p><strong>Clave:</strong> {{ item.clave }}</p>
                                         <p><strong>Ubicación:</strong> {{ item.ubicacion }}</p>
                                         <p><strong>Año:</strong> {{ item.anio }}</p>
@@ -39,7 +39,7 @@
                                         <p><strong>Observaciones:</strong> {{ item.observaciones }}</p>
                                         <p><strong>Estado documento:</strong> {{ item.estado_doc }}</p>
                                         <p><strong>Caracteristicas:</strong> {{ item.caracteristicas_externas_doc }}</p>
-                                        <p><strong>Caracteristicas:</strong> {{ item.caracteristicas_externas_doc }}</p>
+                                        <p><strong>Estado:</strong> {{ item.estado }}</p>
                                         <p><strong>Tipo de acceso:</strong> {{ item.m_acceso.tipo }}</p>
                                         <hr>
                                         <div class="d-flex justify-content-center mt-3">

@@ -18,24 +18,25 @@ class Registros extends Model<
   InferCreationAttributes<Registros>
 > {
     declare id: CreationOptional<number>;
-    declare id_seccion: number;
-    declare id_serie: number;
-    declare id_subserie: number;
-    declare clave: number;
-    declare ubicacion: string ;
-    declare anio: number;
-    declare tomo: number;
-    declare num_exp: number;
-    declare fecha_inicial: Date;
-    declare fecha_final: Date;
-    declare institucion: string ;
-    declare nombre_exp: string ;
-    declare fojas: number ;
-    declare observaciones: string;
+    declare id_seccion: number | null;
+    declare id_serie: number | null;
+    declare id_subserie: number | null;
+    declare clave: number | null;
+    declare ubicacion: string | null;
+    declare anio: number | null;
+    declare tomo: string | null;
+    declare num_exp: string | null;
+    declare fecha_inicial: Date | null;
+    declare fecha_final: Date | null;
+    declare institucion: string | null ;
+    declare nombre_exp: string | null ;
+    declare fojas: number | null;
+    declare observaciones: string | null;
     declare estado_doc: string | null;
-    declare caracteristicas_externas_doc: string ;
-    declare path_portada: string;
-    declare path_doc: string ;
+    declare caracteristicas_externas_doc: string | null;
+    declare estado: string | null;
+    declare path_portada: string | null;
+    declare path_doc: string | null;
     declare tipo_acceso: number;
     declare status: boolean;
     declare createdAt?: Date;
@@ -51,79 +52,83 @@ class Registros extends Model<
             }, 
             id_seccion:{
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: true
             },
             id_serie:{
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: true
             },
             id_subserie:{
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: true
             },
             clave:{
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: true
             },
             ubicacion:{
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             anio:{
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: true
             },
             tomo:{
-                type: DataTypes.INTEGER,
-                allowNull: false
+                type: DataTypes.STRING,
+                allowNull: true
             },
             num_exp:{
-                type: DataTypes.INTEGER,
-                allowNull: false
+                type: DataTypes.STRING,
+                allowNull: true
             },
             fecha_inicial:{
                 type: DataTypes.DATE,
-                allowNull: false
+                allowNull: true
             },
             fecha_final:{
                 type: DataTypes.DATE,
-                allowNull: false
+                allowNull: true
             },
             institucion:{
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             nombre_exp:{
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             fojas:{
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: true
             },
             observaciones:{
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             estado_doc:{
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             caracteristicas_externas_doc:{
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
+            },
+            estado:{
+                type: DataTypes.STRING,
+                allowNull: true
             },
             path_portada:{
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             path_doc:{
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             tipo_acceso:{
                 type: DataTypes.INTEGER,
-                allowNull: false
+                allowNull: true
             },
             status:{
                 type: DataTypes.BOOLEAN,
@@ -131,7 +136,7 @@ class Registros extends Model<
             }, 
             createdAt: {
                 type: DataTypes.DATE,
-                allowNull: false,
+                allowNull: true,
                 defaultValue: DataTypes.NOW
             },
             updatedAt: {

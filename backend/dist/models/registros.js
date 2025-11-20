@@ -20,79 +20,83 @@ Registros.init({
     },
     id_seccion: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     id_serie: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     id_subserie: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     clave: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     ubicacion: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     anio: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     tomo: {
-        type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true
     },
     num_exp: {
-        type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true
     },
     fecha_inicial: {
         type: sequelize_1.DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
     fecha_final: {
         type: sequelize_1.DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
     institucion: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     nombre_exp: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     fojas: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     observaciones: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     estado_doc: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     caracteristicas_externas_doc: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: true
+    },
+    estado: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true
     },
     path_portada: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     path_doc: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     tipo_acceso: {
         type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     status: {
         type: sequelize_1.DataTypes.BOOLEAN,
@@ -100,7 +104,7 @@ Registros.init({
     },
     createdAt: {
         type: sequelize_1.DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         defaultValue: sequelize_1.DataTypes.NOW
     },
     updatedAt: {
