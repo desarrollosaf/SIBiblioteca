@@ -128,4 +128,29 @@ export class BuscadorComponent {
   // })
 }
 
+page: number = 1;               // Página actual
+pageSize: number = 12;          // Registros por página
+
+get paginados() {
+  const start = (this.page - 1) * this.pageSize;
+  const end = start + this.pageSize;
+  return this.resultados.slice(start, end);
+}
+
+totalPages() {
+  return Math.ceil(this.resultados.length / this.pageSize);
+}
+
+nextPage() {
+  if (this.page < this.totalPages()) {
+    this.page++;
+  }
+}
+
+prevPage() {
+  if (this.page > 1) {
+    this.page--;
+  }
+}
+
 }

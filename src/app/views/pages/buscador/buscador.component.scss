@@ -256,6 +256,11 @@
   transition: all 0.2s ease;
 }
 
+.paginastext {
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .record-footer button:hover {
   filter: brightness(1.08);
   transform: translateY(-2px);
@@ -299,4 +304,41 @@
   .record-columns {
     grid-template-columns: 1fr; /* columnas se apilan en móvil */
   }
+
+  pagination-container {
+  width: 100%;
+  margin-top: 25px;
+  display: flex;
+  justify-content: center; /* centra todo */
+}
+
+.pagination {
+  display: flex;
+  gap: 15px; /* espacio entre botones y texto */
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  width: 100%;                /* ocupa toda la fila */
+  max-width: 700px;           /* evita que se vea gigante */
+  justify-content: space-between; /* distribuye los botones */
+  background-color: #f7f7f7;  
+}
+
+.page-btn {
+  padding: 6px 12px;
+  border: none;
+  background: #0056b3;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.page-info {
+  font-weight: bold;
+}
 }

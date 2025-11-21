@@ -16,7 +16,7 @@
           formControlName="busqueda"
           (keyup)="buscar()"
         />
-        <button type="submit">Buscar libro</button>
+        <!-- <button type="submit">Buscar libro</button> -->
       </form>
 
       <div class="hero-books-meta">
@@ -48,7 +48,7 @@
 
     <div class="results-grid">
       <!-- Tarjeta por registro -->
-      <article class="record-card" *ngFor="let item of resultados">
+      <article class="record-card" *ngFor="let item of paginados">
         <!-- Encabezado de la tarjeta -->
         <header class="record-header">
           {{ item.titulo || 'BIBLIOLEX' }}
@@ -87,7 +87,17 @@
         </footer>
       </article>
     </div>
-  </div>
+    <br>
+    <div class=" record-footer" *ngIf="resultados.length > pageSize">
+        <div class="pagination">
+            <button (click)="prevPage()" [disabled]="page === 1" type="button">Anterior</button>
+            <span class="paginastext">Página {{ page }} de {{ totalPages() }}</span>
+            <button (click)="nextPage()" [disabled]="page === totalPages()">Siguiente</button>
+        </div>
+    </div>
+</div>
+    
+  <!-- </div> -->
 </section>
 
 <!-- Mensaje cuando ya buscó y no hay resultados (opcional) -->
