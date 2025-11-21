@@ -6,7 +6,7 @@ import {
   CreationOptional,
 } from 'sequelize';  
 import sequelize from '../database/connectionBiblioteca';
-
+import RoleUsers from './role_user';
 
 class User extends Model<
   InferAttributes<User>,
@@ -65,7 +65,5 @@ User.init(
     ],
   }
 );
-
-
 
 export default User;

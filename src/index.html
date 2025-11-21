@@ -31,9 +31,9 @@ License: For each use, you must have a valid license purchased only from themefo
   <script>
     const themeMode = localStorage.getItem('theme');
     if (themeMode) {
-      document.documentElement.setAttribute('data-bs-theme', themeMode);
+      document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: light)').matches? 'light': 'light');
     } else {
-      document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: dark)').matches? 'dark': 'light');
+      document.documentElement.setAttribute('data-bs-theme', window.matchMedia('(prefers-color-scheme: light)').matches? 'light': 'light');
     }
   </script>
   <!-- END: Setting up theme mode on page load for the splash screen -->
