@@ -12,12 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.editRegistro = exports.updateRegistro = exports.addRegistro = exports.comboAccesos = exports.comboSubseries = exports.comboSeries = exports.comboSecciones = exports.getRegistros = void 0;
+exports.addCsv = exports.editRegistro = exports.updateRegistro = exports.addRegistro = exports.comboAccesos = exports.comboSubseries = exports.comboSeries = exports.comboSecciones = exports.getRegistros = void 0;
 const registros_1 = __importDefault(require("../models/registros"));
 const secciones_1 = __importDefault(require("../models/secciones"));
 const series_1 = __importDefault(require("../models/series"));
 const subseries_1 = __importDefault(require("../models/subseries"));
 const tipo_accesos_1 = __importDefault(require("../models/tipo_accesos"));
+const csv_parse_1 = require("csv-parse");
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const getRegistros = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const registros = yield registros_1.default.findAll({
@@ -155,3 +158,74 @@ const editRegistro = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.editRegistro = editRegistro;
+const addCsv = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ msg: 'No se envió archivo' });
+        }
+        const csvContent = req.file.buffer.toString('utf-8');
+        const records = [];
+        (0, csv_parse_1.parse)(csvContent, {
+            delimiter: ',',
+            columns: false, // usa la primera fila como encabezados
+            skip_empty_lines: true
+        })
+            .on('data', (row) => {
+            records.push(row);
+        })
+            .on('end', () => __awaiter(void 0, void 0, void 0, function* () {
+            for (const element of records) {
+                const fechaInicial = parseFecha(element[3]);
+                const fechaFinal = parseFecha(element[4]);
+                const registro = {
+                    anio: element[0] ? parseInt(element[0]) : null,
+                    tomo: element[1] || null,
+                    num_exp: element[2] || null,
+                    fecha_inicial: fechaInicial,
+                    fecha_final: fechaFinal,
+                    institucion: element[5] || null,
+                    nombre_exp: element[6] || null,
+                    fojas: element[7] ? parseInt(element[7]) : null,
+                    observaciones: element[8] || null,
+                    estado_doc: element[9] || null,
+                    caracteristicas_externas_doc: element[10] || null,
+                    estado: element[11] || null,
+                    path_portada: element[12] || null,
+                    path_doc: element[13] || null,
+                    tipo_acceso: 2,
+                    status: true
+                };
+                if (registro.tomo != '' && registro.tomo != null) {
+                    registro.tomo = registro.tomo.match(/\d+/)[0];
+                }
+                if (registro.num_exp != '' && registro.num_exp != null) {
+                    registro.num_exp = registro.num_exp.match(/\d+/)[0];
+                }
+                if (registro.tomo != null && registro.num_exp != null) {
+                    const rutaArchivo = path_1.default.join(__dirname, `../../storage/tomos/Tomo ${registro.tomo}-${registro.anio}/PDFs`, `Exp ${registro.num_exp}.pdf`);
+                    if (fs_1.default.existsSync(rutaArchivo)) {
+                        registro.path_doc = rutaArchivo;
+                    }
+                }
+                yield registros_1.default.create(registro);
+            }
+            res.json({ msg: 'CSV guardado correctamente' });
+        }));
+    }
+    catch (error) {
+        console.error('Error al cargar csv:', error);
+        return res.status(500).json({ msg: 'Error interno del servidor' });
+    }
+});
+exports.addCsv = addCsv;
+function parseFecha(fecha) {
+    if (!fecha || fecha.trim() === "")
+        return null;
+    const partes = fecha.trim().split('/');
+    if (partes.length !== 3)
+        return null;
+    const [dia, mes, anio] = partes.map(p => parseInt(p));
+    if (!dia || !mes || !anio)
+        return null;
+    return new Date(anio, mes - 1, dia);
+}

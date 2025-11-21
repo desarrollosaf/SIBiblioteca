@@ -13,6 +13,12 @@ export default[
         path: 'editRegistro/:id',
         loadComponent: () => import('./registro/registro.component').then(c => c.RegistroComponent)
     },
+    {
+        path: 'cargarCsv',
+        loadComponent: () => import('./csv/csv.component').then(c => c.CsvComponent)
+    },
+
+    
 
     // {
     //     path: 'bajaPersonal/:id',

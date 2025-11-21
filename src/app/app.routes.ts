@@ -61,6 +61,10 @@ export const routes: Routes = [
       {
         path: 'registros',
         loadChildren: () => import('./views/pages/registros/registro.routes')
+      },
+      {
+        path: 'solPendiente',
+        loadChildren: () => import('./views/pages/solicitudes/solicitud.routes')
       }
     ]
   },

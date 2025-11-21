@@ -1,0 +1,28 @@
+<form [formGroup]="formCsv" (ngSubmit)="addCsv()" class="forms-sample">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">   
+                        <div class="col-md-4">
+                            <h4> Carga de información en CSV</h4>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">   
+                        <div class="col-md-4">
+                            <label> Seleccione el CSV: </label>
+                             <input type="file" formControlName="csv" class="form-control" accept=".csv"  (change)="onFileSelected($event)">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary btn-icon-text">Cargar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>    

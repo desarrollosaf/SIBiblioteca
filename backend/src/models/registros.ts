@@ -18,6 +18,27 @@ class Registros extends Model<
   InferCreationAttributes<Registros>
 > {
     declare id: CreationOptional<number>;
+<<<<<<< HEAD
+    declare id_seccion: number | null;
+    declare id_serie: number | null;
+    declare id_subserie: number | null;
+    declare clave: number | null;
+    declare ubicacion: string | null;
+    declare anio: number | null;
+    declare tomo: string | null;
+    declare num_exp: string | null;
+    declare fecha_inicial: Date | null;
+    declare fecha_final: Date | null;
+    declare institucion: string | null ;
+    declare nombre_exp: string | null ;
+    declare fojas: number | null;
+    declare observaciones: string | null;
+    declare estado_doc: string | null;
+    declare caracteristicas_externas_doc: string | null;
+    declare estado: string | null;
+    declare path_portada: string | null;
+    declare path_doc: string | null;
+=======
     declare id_seccion: number;
     declare id_serie: number;
     declare id_subserie: number;
@@ -36,6 +57,7 @@ class Registros extends Model<
     declare caracteristicas_externas_doc: string ;
     declare path_portada: string;
     declare path_doc: string ;
+>>>>>>> 91e906b93cf90e60d617afcd19f441323b467a47
     declare tipo_acceso: number;
     declare status: boolean;
     declare createdAt?: Date;
@@ -51,6 +73,85 @@ class Registros extends Model<
             }, 
             id_seccion:{
                 type: DataTypes.INTEGER,
+<<<<<<< HEAD
+                allowNull: true
+            },
+            id_serie:{
+                type: DataTypes.INTEGER,
+                allowNull: true
+            },
+            id_subserie:{
+                type: DataTypes.INTEGER,
+                allowNull: true
+            },
+            clave:{
+                type: DataTypes.INTEGER,
+                allowNull: true
+            },
+            ubicacion:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            anio:{
+                type: DataTypes.INTEGER,
+                allowNull: true
+            },
+            tomo:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            num_exp:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            fecha_inicial:{
+                type: DataTypes.DATE,
+                allowNull: true
+            },
+            fecha_final:{
+                type: DataTypes.DATE,
+                allowNull: true
+            },
+            institucion:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            nombre_exp:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            fojas:{
+                type: DataTypes.INTEGER,
+                allowNull: true
+            },
+            observaciones:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            estado_doc:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            caracteristicas_externas_doc:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            estado:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            path_portada:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            path_doc:{
+                type: DataTypes.STRING,
+                allowNull: true
+            },
+            tipo_acceso:{
+                type: DataTypes.INTEGER,
+                allowNull: true
+=======
                 allowNull: false
             },
             id_serie:{
@@ -124,6 +225,7 @@ class Registros extends Model<
             tipo_acceso:{
                 type: DataTypes.INTEGER,
                 allowNull: false
+>>>>>>> 91e906b93cf90e60d617afcd19f441323b467a47
             },
             status:{
                 type: DataTypes.BOOLEAN,
@@ -131,7 +233,11 @@ class Registros extends Model<
             }, 
             createdAt: {
                 type: DataTypes.DATE,
+<<<<<<< HEAD
+                allowNull: true,
+=======
                 allowNull: false,
+>>>>>>> 91e906b93cf90e60d617afcd19f441323b467a47
                 defaultValue: DataTypes.NOW
             },
             updatedAt: {
