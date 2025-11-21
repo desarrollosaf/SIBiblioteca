@@ -25,7 +25,7 @@ export const MENU: MenuItem[] = [
             label: 'Series',
             link: '/series'
           },
-           {
+          {
             label: 'Subseries',
             link: '/subseries'
           }, 
@@ -37,7 +37,6 @@ export const MENU: MenuItem[] = [
             label: 'Registro',
             link: '/registros'
           },
-<<<<<<< HEAD
           {
             label: 'Solicitudes',
             isTitle: true,
@@ -54,8 +53,6 @@ export const MENU: MenuItem[] = [
             label: 'Rechazadas',
             link: '/registros'
           },
-=======
->>>>>>> 91e906b93cf90e60d617afcd19f441323b467a47
         ],
         
       },

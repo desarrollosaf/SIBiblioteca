@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize"
 
-const sequelizeBiblio = new Sequelize('bibliotecaV2', 'homestead', 'secret', {
-    host: '192.168.10.10',
+const sequelizeBiblio = new Sequelize('biblioteca', 'root', '', {
+    host: 'localhost',
     dialect: 'mysql',
     define: {
         freezeTableName: true 

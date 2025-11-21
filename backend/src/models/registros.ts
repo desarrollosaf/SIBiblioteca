@@ -18,7 +18,6 @@ class Registros extends Model<
   InferCreationAttributes<Registros>
 > {
     declare id: CreationOptional<number>;
-<<<<<<< HEAD
     declare id_seccion: number | null;
     declare id_serie: number | null;
     declare id_subserie: number | null;
@@ -38,26 +37,6 @@ class Registros extends Model<
     declare estado: string | null;
     declare path_portada: string | null;
     declare path_doc: string | null;
-=======
-    declare id_seccion: number;
-    declare id_serie: number;
-    declare id_subserie: number;
-    declare clave: number;
-    declare ubicacion: string ;
-    declare anio: number;
-    declare tomo: number;
-    declare num_exp: number;
-    declare fecha_inicial: Date;
-    declare fecha_final: Date;
-    declare institucion: string ;
-    declare nombre_exp: string ;
-    declare fojas: number ;
-    declare observaciones: string;
-    declare estado_doc: string | null;
-    declare caracteristicas_externas_doc: string ;
-    declare path_portada: string;
-    declare path_doc: string ;
->>>>>>> 91e906b93cf90e60d617afcd19f441323b467a47
     declare tipo_acceso: number;
     declare status: boolean;
     declare createdAt?: Date;
@@ -73,7 +52,6 @@ class Registros extends Model<
             }, 
             id_seccion:{
                 type: DataTypes.INTEGER,
-<<<<<<< HEAD
                 allowNull: true
             },
             id_serie:{
@@ -151,81 +129,6 @@ class Registros extends Model<
             tipo_acceso:{
                 type: DataTypes.INTEGER,
                 allowNull: true
-=======
-                allowNull: false
-            },
-            id_serie:{
-                type: DataTypes.INTEGER,
-                allowNull: false
-            },
-            id_subserie:{
-                type: DataTypes.INTEGER,
-                allowNull: false
-            },
-            clave:{
-                type: DataTypes.INTEGER,
-                allowNull: false
-            },
-            ubicacion:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            anio:{
-                type: DataTypes.INTEGER,
-                allowNull: false
-            },
-            tomo:{
-                type: DataTypes.INTEGER,
-                allowNull: false
-            },
-            num_exp:{
-                type: DataTypes.INTEGER,
-                allowNull: false
-            },
-            fecha_inicial:{
-                type: DataTypes.DATE,
-                allowNull: false
-            },
-            fecha_final:{
-                type: DataTypes.DATE,
-                allowNull: false
-            },
-            institucion:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            nombre_exp:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            fojas:{
-                type: DataTypes.INTEGER,
-                allowNull: false
-            },
-            observaciones:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            estado_doc:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            caracteristicas_externas_doc:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            path_portada:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            path_doc:{
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            tipo_acceso:{
-                type: DataTypes.INTEGER,
-                allowNull: false
->>>>>>> 91e906b93cf90e60d617afcd19f441323b467a47
             },
             status:{
                 type: DataTypes.BOOLEAN,
@@ -233,11 +136,7 @@ class Registros extends Model<
             }, 
             createdAt: {
                 type: DataTypes.DATE,
-<<<<<<< HEAD
                 allowNull: true,
-=======
-                allowNull: false,
->>>>>>> 91e906b93cf90e60d617afcd19f441323b467a47
                 defaultValue: DataTypes.NOW
             },
             updatedAt: {
