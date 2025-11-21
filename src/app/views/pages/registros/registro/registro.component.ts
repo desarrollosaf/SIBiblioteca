@@ -170,7 +170,6 @@ const registro: Registro = {
     path_portada: this.formRegistro.value.path_portada ,
     path_doc: this.formRegistro.value.path_doc ,
     tipo_acceso: this.formRegistro.value.tipo_acceso ,
-    
   };
 
   if(this.formRegistro.value.id != 0 && this.formRegistro.value.id != null){
