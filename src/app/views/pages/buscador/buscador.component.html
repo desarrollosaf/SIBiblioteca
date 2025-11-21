@@ -10,9 +10,10 @@
 
       <form class="hero-books-form" [formGroup]="formRegistros">
         <input
+         class="form-control"
           type="text"
           placeholder="Escribe el título, autor o tema..."
-          name="q"
+          formControlName="busqueda"
           (keyup)="buscar()"
         />
         <button type="submit">Buscar libro</button>
