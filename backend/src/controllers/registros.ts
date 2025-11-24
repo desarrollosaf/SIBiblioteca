@@ -204,7 +204,7 @@ export const addCsv = async (req: Request, res: Response): Promise<any> => {
                 if (registro.tomo != null && registro.num_exp != null){
                     const rutaArchivo = path.join(__dirname, `../../storage/tomos/Tomo ${ registro.tomo}-${registro.anio}/PDFs` , `Exp ${registro.num_exp}.pdf`);
                     if (fs.existsSync(rutaArchivo)) {
-                        registro.path_doc = 'storage/tomos/Tomo `${ registro.tomo}`-`${registro.anio}`/PDFs/Exp `${registro.num_exp}`.pdf';
+                        registro.path_doc = 'storage/tomos/Tomo '+registro.tomo+'-'+registro.anio+'/PDFs/Exp '+registro.num_exp+'.pdf';
                         console.log(registro);
                     } 
                 }
