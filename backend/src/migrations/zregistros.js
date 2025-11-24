@@ -10,16 +10,13 @@ module.exports = {
         },
         id_seccion:{
             type: Sequelize.INTEGER,
-            allowNull: false,
         },
         id_serie:{
             type: Sequelize.INTEGER,
-            allowNull: false,
 
         },
         id_subserie:{
             type: Sequelize.INTEGER,
-            allowNull: false,
         },
         clave:{
             type: Sequelize.STRING,
@@ -71,7 +68,6 @@ module.exports = {
         },
         tipo_acceso:{
             type: Sequelize.INTEGER,
-            allowNull: false,
     
         },
         status:{
