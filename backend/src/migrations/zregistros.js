@@ -43,21 +43,21 @@ module.exports = {
             type: Sequelize.STRING,
         },
         nombre_exp:{
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT('long'),
         },
         fojas:{
             type: Sequelize.INTEGER,
         },
         observaciones:{
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT('long'),
         },
         estado_doc:{
             type: Sequelize.STRING,
         },
         caracteristicas_externas_doc:{
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT('long'),
         },
-         estado:{
+        estado:{
             type: Sequelize.STRING,
         },
         path_portada:{
@@ -68,7 +68,6 @@ module.exports = {
         },
         tipo_acceso:{
             type: Sequelize.INTEGER,
-    
         },
         status:{
             type:Sequelize.BOOLEAN,
