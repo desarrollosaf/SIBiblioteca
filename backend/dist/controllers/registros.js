@@ -174,6 +174,7 @@ const addCsv = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             records.push(row);
         })
             .on('end', () => __awaiter(void 0, void 0, void 0, function* () {
+            var _a, _b, _c, _d;
             for (const element of records) {
                 const fechaInicial = parseFecha(element[3]);
                 const fechaFinal = parseFecha(element[4]);
@@ -196,15 +197,16 @@ const addCsv = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                     status: true
                 };
                 if (registro.tomo != '' && registro.tomo != null) {
-                    registro.tomo = registro.tomo.match(/\d+/)[0];
+                    registro.tomo = (_b = (_a = registro.tomo.match(/\d+/)) === null || _a === void 0 ? void 0 : _a[0]) !== null && _b !== void 0 ? _b : null;
                 }
                 if (registro.num_exp != '' && registro.num_exp != null) {
-                    registro.num_exp = registro.num_exp.match(/\d+/)[0];
+                    registro.num_exp = (_d = (_c = registro.num_exp.match(/\d+/)) === null || _c === void 0 ? void 0 : _c[0]) !== null && _d !== void 0 ? _d : null;
                 }
                 if (registro.tomo != null && registro.num_exp != null) {
                     const rutaArchivo = path_1.default.join(__dirname, `../../storage/tomos/Tomo ${registro.tomo}-${registro.anio}/PDFs`, `Exp ${registro.num_exp}.pdf`);
                     if (fs_1.default.existsSync(rutaArchivo)) {
-                        registro.path_doc = rutaArchivo;
+                        registro.path_doc = 'storage/tomos/Tomo ' + registro.tomo + '-' + registro.anio + '/PDFs/Exp ' + registro.num_exp + '.pdf';
+                        console.log(registro);
                     }
                 }
                 yield registros_1.default.create(registro);
