@@ -13,7 +13,6 @@ module.exports = {
         },
         id_serie:{
             type: Sequelize.INTEGER,
-
         },
         id_subserie:{
             type: Sequelize.INTEGER,
@@ -28,10 +27,10 @@ module.exports = {
             type: Sequelize.INTEGER,
         },
         tomo:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         num_exp:{
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
         },
         fecha_inicial:{
             type: Sequelize.DATE,
@@ -40,7 +39,7 @@ module.exports = {
             type: Sequelize.DATE,
         },
         institucion:{
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT('long'),
         },
         nombre_exp:{
             type: Sequelize.TEXT('long'),
@@ -52,7 +51,7 @@ module.exports = {
             type: Sequelize.TEXT('long'),
         },
         estado_doc:{
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT('long'),
         },
         caracteristicas_externas_doc:{
             type: Sequelize.TEXT('long'),
