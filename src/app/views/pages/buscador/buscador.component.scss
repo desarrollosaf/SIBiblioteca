@@ -7,11 +7,11 @@
    ========================== */
 
 .hero-books {
-  min-height: 65vh;
+  min-height: 5vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1.5rem 2rem;
+  padding: 3rem 1.5rem 1rem;
   background: radial-gradient(circle at top, #fdf2df 0, #ffffff 40%, #f9f3ea 100%);
 }
 
@@ -50,7 +50,7 @@
 }
 
 .hero-books-form input {
-  flex: 1 1 230px;
+  flex: 1 1 2130px;
   border-radius: 999px;
   border: 1px solid #e1d3c0;
   padding: 0.9rem 1rem;
@@ -201,6 +201,11 @@
   flex-direction: column;
 }
 
+
+.record-card:hover {
+  transform: translateY(-9px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
 /* Encabezado de tarjeta */
 .record-header {
   text-align: center;
@@ -256,9 +261,11 @@
   transition: all 0.2s ease;
 }
 
+
 .paginastext {
   font-size: 20px;
   font-weight: 600;
+  padding: 5px 15px 15px;
 }
 
 .record-footer button:hover {
@@ -266,6 +273,29 @@
   transform: translateY(-2px);
 }
 
+.div-pagination{
+  padding: 1.5rem 1.3rem 1.1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.div-pagination button {
+  // background: #b0184a;
+  border: none;
+  padding: 0.6rem 1.8rem;
+  // border-radius: 14px;
+  color: #000000;
+  font-weight: 1600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(209, 4, 4, 0.15);
+  transition: all 0.2s ease;
+}
+
+.div-pagination button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-9px);
+}
 /* Mensaje vacío */
 .results-empty {
   text-align: center;
@@ -310,18 +340,6 @@
   margin-top: 25px;
   display: flex;
   justify-content: center; /* centra todo */
-}
-
-.pagination {
-  display: flex;
-  gap: 15px; /* espacio entre botones y texto */
-  align-items: center;
-  padding: 10px 20px;
-  border-radius: 8px;
-  width: 100%;                /* ocupa toda la fila */
-  max-width: 700px;           /* evita que se vea gigante */
-  justify-content: space-between; /* distribuye los botones */
-  background-color: #f7f7f7;  
 }
 
 .page-btn {
