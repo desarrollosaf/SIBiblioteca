@@ -13,7 +13,7 @@ export const buscar = async (req: Request, res: Response): Promise<any> => {
     try {
         const { Op } = require('sequelize');
         const { id } = req.params;
-
+    
         const registros = await Registros.findAll({
             include:[
                 { 
@@ -49,7 +49,7 @@ export const buscar = async (req: Request, res: Response): Promise<any> => {
                 status: true
             }
         });
-    
+        
         return res.json(registros);
     } catch (error) {
         console.error('Error al generar consulta:', error);

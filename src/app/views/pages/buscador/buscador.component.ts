@@ -46,7 +46,8 @@ export class BuscadorComponent {
           telefono:['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('^[0-9]+$')]],
           correo:['', [Validators.required, Validators.email]],
           confirma_correo:['',[Validators.required, Validators.email]],
-          idRegistro:['']
+          idRegistro:[''],
+          nombre_exp:['']
       },{
         validators:[this.emailsValidators()]
       });
@@ -81,13 +82,19 @@ export class BuscadorComponent {
       }
 
   buscar(){
-    this._busqueda.getBusqueda(this.formRegistros.value.busqueda).subscribe((resultados) => {
+    if(this.formRegistros.value.busqueda == '' || this.formRegistros.value.busqueda == null){
+      this.resultados = [];
+    }else{
+       this._busqueda.getBusqueda(this.formRegistros.value.busqueda).subscribe((resultados) => {
       this.resultados = resultados;
     });
+    }
+   
   }
 
-  openSmModal(content:any, idRegistro: number){
-      this.formSolicitud.patchValue({idRegistro: idRegistro})
+  openSmModal(content:any, idRegistro: number, nombre_exp: string){
+      this.formSolicitud.patchValue({idRegistro: idRegistro, nombre_exp: nombre_exp})
+      console.log("Form:", this.formSolicitud.value);
       const modalRef = this.modelService.open(content, {size:'lg'}).result.then((result) =>{
        
       }).catch((res) => {})

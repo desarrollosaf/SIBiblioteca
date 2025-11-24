@@ -35,8 +35,9 @@
       </div>
       <p>Catálogo digital del sistema de biblioteca</p>
     </div>
-  </div>
+  </div> 
 </section>
+
 
 <!-- RESULTADOS -->
 <section class="results-section" *ngIf="resultados && resultados.length">
@@ -48,52 +49,62 @@
 
     <div class="results-grid">
       <!-- Tarjeta por registro -->
-      <article class="record-card" *ngFor="let item of paginados">
-        <!-- Encabezado de la tarjeta -->
-        <header class="record-header">
-          {{ item.titulo || 'BIBLIOLEX' }}
-        </header>
+    
+    <article class="record-card"  *ngFor="let item of paginados" (click)="openSmModal(smModal, item.id, item.nombre_exp)">
+      <!-- Encabezado de la tarjeta -->
+      <header class="record-header">
+        {{ item.nombre_exp || 'BIBLIOLEX' }}
+      </header>
 
-        <!-- Cuerpo con datos -->
-        <div class="record-body">
-          <div class="record-columns">
-            <div class="record-col">
-              <p><strong>Clasificación:</strong> {{ item.clasificacion }}</p>
-              <p><strong>Clave:</strong> {{ item.clave }}</p>
-              <p><strong>Ubicación:</strong> {{ item.ubicacion }}</p>
-              <p><strong>Año:</strong> {{ item.anio }}</p>
-              <p><strong>Tomo:</strong> {{ item.tomo }}</p>
-              <p><strong>Número de expediente:</strong> {{ item.numeroExpediente }}</p>
-              <p><strong>Fecha inicial:</strong> {{ item.fechaInicial | date:'dd/MM/yyyy' }}</p>
-              <p><strong>Fecha final:</strong> {{ item.fechaFinal | date:'dd/MM/yyyy' }}</p>
-            </div>
+      <!-- Cuerpo con datos -->
+      <div class="record-body">
+        <div class="record-columns">
+          <div class="record-col">
+            <p><strong>Clasificación:</strong> {{ item.clasificacion }}</p>
+            <p><strong>Clave:</strong> {{ item.clave }}</p>
+            <p><strong>Ubicación:</strong> {{ item.ubicacion }}</p>
+            <p><strong>Año:</strong> {{ item.anio }}</p>
+            <p><strong>Tomo:</strong> {{ item.tomo }}</p>
+            <p><strong>Número de expediente:</strong> {{ item.numeroExpediente }}</p>
+            <p><strong>Fecha inicial:</strong> {{ item.fechaInicial | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Fecha final:</strong> {{ item.fechaFinal | date:'dd/MM/yyyy' }}</p>
+          </div>
 
-            <div class="record-col">
-              <p><strong>Institución:</strong> {{ item.institucion }}</p>
-              <p><strong>Fojas:</strong> {{ item.fojas }}</p>
-              <p><strong>Observaciones:</strong> {{ item.observaciones }}</p>
-              <p><strong>Estado documento:</strong> {{ item.estadoDocumento }}</p>
-              <p><strong>Características:</strong> {{ item.caracteristicas }}</p>
-              <p><strong>Tipo de acceso:</strong> {{ item.tipoAcceso }}</p>
-            </div>
+          <div class="record-col">
+            <p><strong>Institución:</strong> {{ item.institucion }}</p>
+            <p><strong>Fojas:</strong> {{ item.fojas }}</p>
+            <p><strong>Observaciones:</strong> {{ item.observaciones }}</p>
+            <p><strong>Estado documento:</strong> {{ item.estadoDocumento }}</p>
+            <p><strong>Características:</strong> {{ item.caracteristicas }}</p>
+            <p><strong>Tipo de acceso:</strong> {{ item.tipoAcceso }}</p>
           </div>
         </div>
+      </div>
 
-        <!-- Botón -->
-        <footer class="record-footer">
-          <button type="button" >
-            Solicitar visualización
-          </button>
-        </footer>
-      </article>
+      <!-- Botón -->
+      <!-- <footer class="record-footer">
+        <button type="button" >
+          Solicitar visualización
+        </button>
+      </footer> -->
+    </article>
     </div>
+  
     <br>
-    <div class=" record-footer" *ngIf="resultados.length > pageSize">
-        <div class="pagination">
-            <button (click)="prevPage()" [disabled]="page === 1" type="button">Anterior</button>
-            <span class="paginastext">Página {{ page }} de {{ totalPages() }}</span>
-            <button (click)="nextPage()" [disabled]="page === totalPages()">Siguiente</button>
-        </div>
+    <div class="div-pagination" *ngIf="resultados.length > pageSize">
+      <button (click)="prevPage()" [disabled]="page === 1" type="button">   
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+        </svg>
+      </button>
+
+      <span class="paginastext">Página {{ page }} de {{ totalPages() }}</span>
+
+      <button (click)="nextPage()" [disabled]="page === totalPages()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+        </svg>
+      </button>
     </div>
 </div>
     
@@ -109,3 +120,70 @@
     <p>No se encontraron resultados para "<strong></strong>".</p>
   </div>
 </section>
+
+<ng-template #smModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro de solicitud.  </h5>
+        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button> 
+    </div>
+    <div class="modal-body">
+      
+        <form [formGroup]="formSolicitud" (ngSubmit)="addSolicitud()" class="forms-sample">
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                              <h6 class="modal-title" id="exampleModalLabel">{{ formSolicitud.value.nombre_exp }}</h6>
+                            </div>
+                        </div>
+                              
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label> Nombre completo del solicitante: </label>
+                                    <input type="hidden" formControlName="idRegistro" class="form-control">
+                                    <input type="text" formControlName="nombre_completo" class="form-control">
+                                    <div *ngIf="nombre?.invalid && (nombre?.dirty || nombre?.touched)" class="text-danger">
+                                        <div *ngIf="nombre?.errors?.['required']">El nombre es obligatorio.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label> Telefono: </label>
+                                    <input type="text" formControlName="telefono" class="form-control">
+                                    <div *ngIf="telefono?.invalid&& (telefono?.dirty|| telefono?.touched)" class="text-danger">
+                                        <div *ngIf="telefono?.errors?.['required']">El telefóno es obligatorio.</div>
+                                        <div *ngIf="telefono?.errors?.['maxlength']">Máximo {{ telefono?.errors?.['maxlength'].requiredLength }} digitos.</div>
+                                        <div *ngIf="telefono?.errors?.['minlength']">Mínimo {{ telefono?.errors?.['mixlength'].requiredlength }} digitos.</div>
+                                        <div *ngIf="telefono?.errors?.['pattern']">Solo se permiten números</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label> Correo electrónico: </label>
+                                    <input type="text" formControlName="correo" class="form-control">
+                                    <div *ngIf="correo?.invalid && (correo?.dirty || correo?.touched)" class="text-danger">
+                                        <div *ngIf="correo?.errors?.['required']">El correo es obligatorio.</div>
+                                        <div *ngIf="correo?.errors?.['email']">El formato del correo no es válido.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label> Confirma correo electrónico: </label>
+                                    <input type="text" formControlName="confirma_correo" class="form-control">
+                                </div>
+                                <div *ngIf="formSolicitud.errors?.correosNoCoinciden && formSolicitud.touched" class="text-danger">
+                                    Los correos no coinciden
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('by: close button')">Cancelar</button>
+        <button type="submit" (click)="addSolicitud()" [disabled]="formSolicitud.invalid" class="btn btn-primary btn-icon-text">Guardar</button>
+    </div>
+</ng-template>
