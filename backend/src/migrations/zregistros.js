@@ -60,6 +60,9 @@ module.exports = {
         caracteristicas_externas_doc:{
             type: Sequelize.STRING,
         },
+         estado:{
+            type: Sequelize.STRING,
+        },
         path_portada:{
             type: Sequelize.STRING,
         },
