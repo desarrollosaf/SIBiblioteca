@@ -196,15 +196,16 @@ export const addCsv = async (req: Request, res: Response): Promise<any> => {
                     status: true
                 };
                 if(registro.tomo != '' && registro.tomo != null){
-                    registro.tomo = registro.tomo.match(/\d+/)[0];
+                    registro.tomo = registro.tomo.match(/\d+/)?.[0] ?? null;
                 }
                 if(registro.num_exp != '' && registro.num_exp != null){
-                    registro.num_exp = registro.num_exp.match(/\d+/)[0];
+                    registro.num_exp = registro.num_exp.match(/\d+/)?.[0] ?? null;
                 }
                 if (registro.tomo != null && registro.num_exp != null){
                     const rutaArchivo = path.join(__dirname, `../../storage/tomos/Tomo ${ registro.tomo}-${registro.anio}/PDFs` , `Exp ${registro.num_exp}.pdf`);
                     if (fs.existsSync(rutaArchivo)) {
-                        registro.path_doc = rutaArchivo;
+                        registro.path_doc = 'storage/tomos/Tomo `${ registro.tomo}`-`${registro.anio}`/PDFs/Exp `${registro.num_exp}`.pdf';
+                        console.log(registro);
                     } 
                 }
                 await  Registros.create(registro);
