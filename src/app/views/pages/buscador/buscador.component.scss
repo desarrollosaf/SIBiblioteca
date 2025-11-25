@@ -359,4 +359,13 @@
 .page-info {
   font-weight: bold;
 }
+
+.nomExp{
+  text-align: justify !important;
+  text-justify: inter-word;
+  width: 100%;
+  white-space: normal !important;
+  flex: 0 0 auto;
+  word-break: break-all;
+}
 }
